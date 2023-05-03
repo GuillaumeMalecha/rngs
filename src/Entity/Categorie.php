@@ -27,6 +27,11 @@ class Categorie
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="categories")
+     */
+    private $promotion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Categorie
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }
