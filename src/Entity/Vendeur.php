@@ -22,6 +22,11 @@ class Vendeur
      */
     private $numeroemploye;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, mappedBy="vendeurs", cascade={"persist", "remove"})
+     */
+    private $utilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,28 @@ class Vendeur
     public function setNumeroemploye(int $numeroemploye): self
     {
         $this->numeroemploye = $numeroemploye;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($utilisateur === null && $this->utilisateur !== null) {
+            $this->utilisateur->setVendeurs(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($utilisateur !== null && $utilisateur->getVendeurs() !== $this) {
+            $utilisateur->setVendeurs($this);
+        }
+
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

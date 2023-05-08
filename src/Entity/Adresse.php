@@ -42,6 +42,11 @@ class Adresse
      */
     private $numero;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="adresses")
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Adresse
     public function setNumero(int $numero): self
     {
         $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

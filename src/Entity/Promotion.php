@@ -39,9 +39,15 @@ class Promotion
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=produit::class, mappedBy="promotion")
+     */
+    private $produits;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,36 @@ class Promotion
             // set the owning side to null (unless already changed)
             if ($category->getPromotion() === $this) {
                 $category->setPromotion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setPromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(produit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getPromotion() === $this) {
+                $produit->setPromotion(null);
             }
         }
 

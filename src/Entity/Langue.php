@@ -22,6 +22,11 @@ class Langue
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProduitLangue::class, inversedBy="langues")
+     */
+    private $produits_langues;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Langue
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getProduitsLangues(): ?ProduitLangue
+    {
+        return $this->produits_langues;
+    }
+
+    public function setProduitsLangues(?ProduitLangue $produits_langues): self
+    {
+        $this->produits_langues = $produits_langues;
 
         return $this;
     }

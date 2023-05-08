@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Commande
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $donneepaiement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commandes")
+     */
+    private $client;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=produitcommande::class, inversedBy="commandes")
+     */
+    private $produits_commandes;
+
+    public function __construct()
+    {
+        $this->produits_commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +120,42 @@ class Commande
     public function setDonneepaiement(?string $donneepaiement): self
     {
         $this->donneepaiement = $donneepaiement;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, produitcommande>
+     */
+    public function getProduitsCommandes(): Collection
+    {
+        return $this->produits_commandes;
+    }
+
+    public function addProduitsCommande(produitcommande $produitsCommande): self
+    {
+        if (!$this->produits_commandes->contains($produitsCommande)) {
+            $this->produits_commandes[] = $produitsCommande;
+        }
+
+        return $this;
+    }
+
+    public function removeProduitsCommande(produitcommande $produitsCommande): self
+    {
+        $this->produits_commandes->removeElement($produitsCommande);
 
         return $this;
     }
