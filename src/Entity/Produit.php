@@ -40,12 +40,12 @@ class Produit
     private $datesortie;
 
     /**
-     * @ORM\ManyToMany(targetEntity=produitcommande::class, inversedBy="produits")
+     * @ORM\ManyToMany(targetEntity=ProduitCommande::class, inversedBy="produits")
      */
     private $produits_commandes;
 
     /**
-     * @ORM\OneToMany(targetEntity=image::class, mappedBy="produit")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="produit")
      */
     private $images;
 

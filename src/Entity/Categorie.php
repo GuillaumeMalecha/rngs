@@ -35,7 +35,7 @@ class Categorie
     private $promotion;
 
     /**
-     * @ORM\OneToMany(targetEntity=produit::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie")
      */
     private $produits;
 

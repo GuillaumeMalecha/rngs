@@ -47,7 +47,7 @@ class CategorieController extends AbstractController
         }
 
         return $this->render('categorie/ajouter.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 }
