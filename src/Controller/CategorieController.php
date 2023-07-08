@@ -50,4 +50,63 @@ class CategorieController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/detailcategorie/{id}", name="detailcategorie")
+     */
+
+    public function detailcategorie($id, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Categorie::class);
+        $categorie = $repository->find($id);
+
+        if (!$categorie) {
+            throw $this->createNotFoundException(
+                'Aucune catégorie trouvée avec le numéro ' . $id
+            );
+        }
+
+        return $this->render('categorie/detail.html.twig', [
+            'categorie' => $categorie,
+        ]);
+    }
+
+    /**
+     * @Route("/detailcategorie/{id}/modifier", name="modifiercategorie")
+     */
+
+    public function modifiercategorie(int $id, EntityManagerInterface $entityManager, Request $request)
+    {
+        $repository = $entityManager->getRepository(Categorie::class);
+        $categorie = $repository->find($id);
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorie = $form->getData();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('toutescategories');
+        }
+
+        return $this->renderForm('categorie/modifier.html.twig', [
+            'form' => $form,
+            'categorie' => $categorie,
+        ]);
+    }
+
+    /**
+     * @Route("/detailcategorie/{id}/supprimer", name="supprimercategorie")
+     */
+
+    public function supprimercategorie(int $id, EntityManagerInterface $entityManager)
+    {
+        $repository = $entityManager->getRepository(Categorie::class);
+        $categorie = $repository->find($id);
+        $entityManager->remove($categorie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('toutescategories');
+    }
+
 }

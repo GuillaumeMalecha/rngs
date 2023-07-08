@@ -35,12 +35,12 @@ class Promotion
     private $pourcentage;
 
     /**
-     * @ORM\OneToMany(targetEntity=categorie::class, mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="promotion")
      */
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=produit::class, mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="promotion")
      */
     private $produits;
 

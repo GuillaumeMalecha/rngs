@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations de la catégorie de produit {{ categorie.nom }}{% endblock %}
+
+{% block body %}
+
+
+
+    <section class="image-cover hero-banner" style="background:url(https://picsum.photos/1920/1000) no-repeat;"
+             data-overlay="6">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="loving-modern-login">
+                        <h2>{{ categorie.nom }} </h2>
+                        <p>Description : {{ categorie.description }}</p>
+
+                            <a href="{{ path('modifiercategorie', {id: categorie.id}) }}">
+                                <button type="button" class="btn btn-info">Modifier la catégorie</button>
+                            </a>
+                            <a href="{{ path('supprimercategorie', {id: categorie.id}) }}">
+                                <button type="button" class="btn btn-danger">Supprimer la catégorie</button>
+                            </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ============================ Début bandeau liste catégories ================================== -->
+    <section class="theme-bg call-to-act">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-9 col-md-8">
+                    <div class="clt-caption">
+                        <h3>Autre chose ?</h3>
+                        <p>Retrouvez l'ensemble des catégories de service.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <a href="{{ path('toutescategories') }}" class="btn btn-md btn-light clt-act">Toutes les catégories<i class="lni-shift-right ml-2"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ============================ Fin bandeau liste catégories ================================== -->
+
+
+{% endblock %}

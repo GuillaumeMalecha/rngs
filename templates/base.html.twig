@@ -99,9 +99,8 @@
                                             </li>
                                         {% endif %}
 
-                                        {% if is_granted('ROLE_ADMIN') == true %}
                                             <li>
-                                                <a href="">
+                                                <a href="{{ path('ajoutcategorie') }}">
                                                     <div class="mg-menu-items">
                                                         <i class="lni-crown"></i>
                                                         <h5>Ajoutez une catégorie<span>Un nouveau type de produit</span>
@@ -110,16 +109,7 @@
                                                 </a>
                                             </li>
 
-                                            {#<li>
-                                                <a href="{{ path('ajoutprestataire') }}">
-                                                    <div class="mg-menu-items">
-                                                        <i class="lni-add-file"></i>
-                                                        <h5>Ajoutez un prestataire<span>Listez votre entreprise</span>
-                                                        </h5>
-                                                    </div>
-                                                </a>
-                                            </li>#}
-                                        {% endif %}
+
                                     </ul>
                                 </li>
 

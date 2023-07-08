@@ -50,7 +50,7 @@ class Commande
     private $client;
 
     /**
-     * @ORM\ManyToMany(targetEntity=produitcommande::class, inversedBy="commandes")
+     * @ORM\ManyToMany(targetEntity=ProduitCommande::class, inversedBy="commandes")
      */
     private $produits_commandes;
 
