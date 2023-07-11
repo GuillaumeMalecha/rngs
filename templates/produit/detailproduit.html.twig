@@ -1,0 +1,66 @@
+{% extends'base.html.twig' %}
+
+{% block title %}Information du produit {{ produit.nom }}{% endblock %}
+
+{% block body %}
+
+<section class="spd-wrap">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+
+                <div class="slide-property-detail">
+
+                    <div class="slide-property-first">
+                        <div class="listname-into">
+
+                            <h2>{{ produit.nom }} {% for categorie in produit.categorie %}
+                                    <a href="{{ path('detailcategorie', {'id': categorie.id}) }}"><span
+                                                class="prt-type rent">{{ categorie.nom }}</span></a> {% endfor %}
+                                {% endfor %}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="block-wrap">
+                    <div class="block-header">
+                        <h4 class="block-title">Description de : {{ produit.nom }}</h4>
+                    </div>
+                </div>
+                <div class="block-wrap">
+                    {% for categorie in produit.categorie %}
+                        <div class="block-header">
+                            <h4 class="block-title"> {{ categorie.nom }}</h4>
+                        </div>
+                        <div class="block-body">
+                            <p>{{ categorie.description }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <!-- Listing Sidebar -->
+            <div class="col-lg-4 col-md-12 col-sm-12">
+
+
+                <div class="verified-list mb-4">
+                    <i class="ti-check"></i>Produit certifié confirme
+                </div>
+
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-direction"></i>Informations : {{ produit.nom }}</h4>
+                    </div>
+                </div>
+            </div>
+</section>
