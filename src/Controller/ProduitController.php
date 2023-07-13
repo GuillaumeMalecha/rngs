@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,8 +70,12 @@ class ProduitController extends AbstractController
         $repository = $entityManager->getRepository(Produit::class);
         $produit = $repository->find($id);
 
+        $repository = $entityManager->getRepository(Categorie::class);
+        $categorie = $repository->find(['id' => $produit->getCategorie()]);
+
         return $this->render('produit/detailproduit.html.twig', [
-            'produit' => $produit
+            'produit' => $produit,
+            'categorie' => $categorie
         ]);
     }
 

@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitController!{% endblock %}
+{% block title %}Tous les Produits !{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h2 class="ipt-title">Tous les Produits</h2>
+                    <span class="ipn-subtitle">Une liste qui vous aidera à trouver le service à votre service.</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <section>
+        <div class="container">
+            <br>
+            <ul>
+                {# Boucle d'affichage des prestataires #}
+                {% for produit in pagination %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom du produit : {{ produit.nom }}</h3>
+                    <p>Description : {{ produit.description }}</p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/src/Controller/ProduitController.php'|file_link(0) }}">src/Controller/ProduitController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/templates/produit/index.html.twig'|file_link(0) }}">templates/produit/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    <a href="{{ path ("detailproduit", {id:produit.id}) }}">
+                        <button type="button" class="btn btn-theme">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+                {% endfor %}
+            </ul>
+        </div>
+        {# Gestion de la pagination #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
+
 {% endblock %}

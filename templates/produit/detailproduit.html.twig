@@ -1,66 +1,71 @@
-{% extends'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Information du produit {{ produit.nom }}{% endblock %}
 
 {% block body %}
 
-<section class="spd-wrap">
-    <div class="container">
-        <div class="row">
+    <section class="spd-wrap">
+        <div class="container">
+            <div class="row">
 
-            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-12 col-md-12">
 
-                <div class="slide-property-detail">
+                    <div class="slide-property-detail">
 
-                    <div class="slide-property-first">
-                        <div class="listname-into">
+                        <div class="slide-property-first">
+                            <div class="listname-into">
 
-                            <h2>{{ produit.nom }} {% for categorie in produit.categorie %}
+                                <h2>{{ produit.nom }}
                                     <a href="{{ path('detailcategorie', {'id': categorie.id}) }}"><span
-                                                class="prt-type rent">{{ categorie.nom }}</span></a> {% endfor %}
-                                {% endfor %}
-                            </h2>
+                                                class="prt-type rent">{{ categorie.nom }}</span></a>
+                                </h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="grey">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                <div class="block-wrap">
-                    <div class="block-header">
-                        <h4 class="block-title">Description de : {{ produit.nom }}</h4>
-                    </div>
-                </div>
-                <div class="block-wrap">
-                    {% for categorie in produit.categorie %}
+    <section class="grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="block-wrap">
                         <div class="block-header">
-                            <h4 class="block-title"> {{ categorie.nom }}</h4>
+                            <h3 class="block-title">Description de : {{ produit.nom }}</h3>
+                        </div>
+                            <div class="block-header">
+                                <h4 class="block-title"> {{ produit.categorie.nom }}</h4>
+                            </div>
+                            <div class="block-body">
+                                <p>{{ produit.categorie.description }}
+                            </div>
+                        <div class="block-header">
+                            <h4 class="block-title"> {{ produit.nom }}</h4>
                         </div>
                         <div class="block-body">
-                            <p>{{ categorie.description }}
+                            <p>{{ produit.description }}
                         </div>
-                    {% endfor %}
+                    </div>
+
                 </div>
-
-            </div>
-            <!-- Listing Sidebar -->
-            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- Listing Sidebar -->
+                <div class="col-lg-4 col-md-12 col-sm-12">
 
 
-                <div class="verified-list mb-4">
-                    <i class="ti-check"></i>Produit certifié confirme
-                </div>
+                    <div class="verified-list mb-4">
+                        <i class="ti-check"></i>Produit certifié conforme
+                    </div>
 
-                <div class="tr-single-box">
-                    <div class="tr-single-header">
-                        <h4><i class="ti-direction"></i>Informations : {{ produit.nom }}</h4>
+                    <div class="tr-single-box">
+                        <div class="tr-single-header">
+                            <h4><i class="ti-direction"></i>Informations : {{ produit.description }}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
-</section>
+        </div>
+    </section>
+
+{% endblock %}

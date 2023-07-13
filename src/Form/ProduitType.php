@@ -51,8 +51,7 @@ class ProduitType extends AbstractType
                 'label' => 'Promotion : ',
                 'placeholder' => 'Choisir une promotion',
                 'required' => false,
-                'multiple' => true,
-                'expanded' => true
+
             ])*/
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
@@ -60,8 +59,7 @@ class ProduitType extends AbstractType
                 'label' => 'Catégorie : ',
                 'placeholder' => 'Choisir une catégorie',
                 'required' => true,
-                'multiple' => true,
-                'expanded' => true
+
             ])
             ->add('Enregistrer', SubmitType::class)
         ;
