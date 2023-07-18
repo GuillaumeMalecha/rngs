@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Image;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,7 +50,22 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $produit = $form->getData();
+
+            $imageFile = $form->get('images')->getData();
+            if ($imageFile) {
+                $image = new Image();
+                $fileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $fileName
+                );
+                $image->setNom($fileName);
+                $produit->setImage($image);
+                $entityManager->persist($image);
+            }else{
+                $produit->setImage(null);
+            }
+
             $entityManager->persist($produit);
             $entityManager->flush();
 

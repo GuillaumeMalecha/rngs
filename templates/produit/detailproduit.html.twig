@@ -4,33 +4,44 @@
 
 {% block body %}
 
-    <section class="spd-wrap">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-12 col-md-12">
-
-                    <div class="slide-property-detail">
-
-                        <div class="slide-property-first">
-                            <div class="listname-into">
-
-                                <h2>{{ produit.nom }}
-                                    <a href="{{ path('detailcategorie', {'id': categorie.id}) }}"><span
-                                                class="prt-type rent">{{ categorie.nom }}</span></a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section class="grey">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12">
+
+                    <div class="slide-property-first mb-4">
+                        <div class="listname-into">
+                            <h2>{{ produit.nom }} <a href="{{ path('detailcategorie', {'id': categorie.id}) }}"><span
+                                            class="prt-type rent">{{ categorie.nom }}</span></a></h2>
+                        </div>
+                    </div>
+
+                    <div class="property3-slide single-advance-property mb-4">
+
+                        <div class="slider-for">
+                            <a href="https://picsum.photos/1200/852" class="item-slick"><img src="https://picsum.photos/1200/852" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
+                            <a href="{{ asset('/images/'~produit.images.nom) }}" class="item-slick"><img src="{{ asset('/images/'~produit.images.nom) }}" alt="Alt"></a>
+                        </div>
+                        <div class="slider-nav">
+                            <div class="item-slick"><img src="https://picsum.photos/1200/852" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                        </div>
+
+                    </div>
+
                     <div class="block-wrap">
                         <div class="block-header">
                             <h3 class="block-title">Description de : {{ produit.nom }}</h3>

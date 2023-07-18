@@ -232,4 +232,16 @@ class Produit
 
         return $this;
     }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }
