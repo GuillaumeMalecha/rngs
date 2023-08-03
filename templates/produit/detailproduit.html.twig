@@ -20,17 +20,19 @@
                     <div class="property3-slide single-advance-property mb-4">
 
                         <div class="slider-for">
-                            <a href="https://picsum.photos/1200/852" class="item-slick"><img src="https://picsum.photos/1200/852" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="{{ asset('/images/'~produit.images.nom) }}" class="item-slick"><img src="{{ asset('/images/'~produit.images.nom) }}" alt="Alt"></a>
+                            {% for image in produit.images %}
+                                <a href="{{ asset('images/' ~ image.nom) }}" class="item-slick">
+                                    <img src="{{ asset('images/' ~ image.nom) }}" alt="Alt">
+                                </a>
+                            {% endfor %}
                         </div>
                         <div class="slider-nav">
-                            <div class="item-slick"><img src="https://picsum.photos/1200/852" alt="Alt"></div>
                             <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
                             <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
                             <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
