@@ -67,17 +67,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('typeutilisateur', ChoiceType::class, [
-                'label' => 'Quel type d\'utilisateur êtes-vous ?',
-                'choices' => [
-                    'Prestataire' => 'prestataire',
-                    'Internaute' => 'internaute',
-                ],
-                'expanded' => true,
-                'multiple' => false,
-                'required' => true,
-            ])
-
 
             /*->add('Enregistrer', SubmitType::class, [
                 'attr' => [
