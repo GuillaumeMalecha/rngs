@@ -209,23 +209,33 @@
 
                             {% if is_granted('ROLE_USER') %}
                                 <ul class="attributes attributes-desk ad-two">
-                                    <li class="log-icon lg-ic"><a href="#" data-toggle="modal" data-target="#login"><i
-                                                    class="ti-user"></i></a></li>
+                                    <li class="log-icon lg-ic"><a href="{{ path('panier_show') }}"><i
+                                                    class="ti-shopping-cart"></i></a></li>
                                     <li class="login-attri mid-rb"><a href="" class="br-4">Se
                                             déconnecter</a></li>
                                 </ul>
 
                             {% else %}
                                 <ul class="attributes attributes-desk ad-two">
-                                    <li class="log-icon lg-ic"><a href="#" data-toggle="modal" data-target="#login"><i
-                                                    class="ti-user"></i></a></li>
+                                    <li class="log-icon lg-ic"><a href="{{ path('panier_show') }}"><i
+                                                    class="ti-shopping-cart"></i></a></li>
                                     <li class="login-attri mid-rb"><a href="" class="br-4">Se
                                             connecter</a></li>
                                 </ul>
                             {% endif %}
-
+                        </li>
+                    </ul>
                 </nav>
             </div>
+
+            {% for rubrique, messages in app.flashes %}
+                <div class="alert alert-{{ rubrique }}">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
         {% endblock %}
 
         {% block body %}{% endblock %}
