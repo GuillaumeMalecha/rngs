@@ -80,7 +80,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="">
+                                            <a href="{{ path('toutescategories') }}">
                                                 <div class="mg-menu-items">
                                                     <i class="lni-list"></i>
                                                     <h5>Catégories<span>Les types d'objets proposés</span></h5>
@@ -90,7 +90,7 @@
                                         {% if is_granted('ROLE_USER') == true %}
 
                                             <li>
-                                                <a href="">
+                                                <a href="{{ path('app_promotion') }}">
                                                     <div class="mg-menu-items">
                                                         <i class="lni-ticket"></i>
                                                         <h5>Les promotions<span>Les réductions du moment</span></h5>
@@ -99,15 +99,25 @@
                                             </li>
                                         {% endif %}
 
-                                            <li>
-                                                <a href="{{ path('ajoutcategorie') }}">
-                                                    <div class="mg-menu-items">
-                                                        <i class="lni-crown"></i>
-                                                        <h5>Ajoutez une catégorie<span>Un nouveau type de produit</span>
-                                                        </h5>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                        <li>
+                                            <a href="{{ path('ajoutcategorie') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-crown"></i>
+                                                    <h5>Ajoutez une catégorie<span>Un nouveau type de produit</span>
+                                                    </h5>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ path('ajoutproduit') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-crown"></i>
+                                                    <h5>Ajoutez un produit<span>Un nouvel article sur le store</span>
+                                                    </h5>
+                                                </div>
+                                            </a>
+                                        </li>
 
 
                                     </ul>

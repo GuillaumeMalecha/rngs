@@ -1,20 +1,102 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bonjour Bien-être{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/templates/home/register.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+
+    <!-- ============================ Début Catégorie du mois ============================= -->
+    <section class="gray-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <ul class="col-lg-8 col-md-10">
+                    <div class="sec-heading center">
+                        <h2>Ce mois-ci :</h2>
+                    </div>
+                    {% for categorie in categories %}
+
+
+                            <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
+                            <h2>Catégorie mise en avant : {{ categorie.nom }}</h2>
+                            <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                                <button type="button" class="btn btn-primary">En savoir plus</button>
+                            </a>
+                            <a href="{{ path ("toutescategories") }}">
+                                <button type="button" class="btn btn-secondary">Toutes les catégories</button>
+                            </a>
+                            <br>
+                            <br>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- ============================ Fin Catégorie du mois ============================= -->
+
+
+    <!-- ============================ Début bandeau flèche ========================== -->
+    <section class="theme-bg lttop-title">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="sec-heading center light mb-5">
+                        <h2>Les 4 derniers articles ajoutés sur notre Shop</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="title__curve"></div>
+    </section>
+    <!-- ============================ Fin bandeau flèche =========================== -->
+
+
+    <!-- ============================ Début boucle derniers articles =========================== -->
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <ul class="col-lg-8 col-md-10">
+                <br>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================ Fin boucle derniers articles =========================== -->
+
+
+
+
+
+    <!-- ============================ Début bandeau liste catégories ================================== -->
+    <section class="theme-bg call-to-act">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-9 col-md-8">
+                    <div class="clt-caption">
+                        <h3>Vous en voulez encore ?</h3>
+                        <p>Retrouvez toutes les catégories de notre Shop.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <a href="{{ path('toutescategories') }}" class="btn btn-md btn-light clt-act">Toutes les catégories<i class="lni-shift-right ml-2"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ============================ Fin bandeau liste catégories ================================== -->
+
+
+
+
+
+
 {% endblock %}

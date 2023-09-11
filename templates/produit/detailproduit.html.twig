@@ -20,26 +20,20 @@
                     <div class="property3-slide single-advance-property mb-4">
 
                         <div class="slider-for">
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
-                            <a href="https://via.placeholder.com/1200x850" class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></a>
                             {% for image in produit.images %}
                                 <a href="{{ asset('images/' ~ image.nom) }}" class="item-slick">
                                     <img src="{{ asset('images/' ~ image.nom) }}" alt="Alt">
                                 </a>
                             {% endfor %}
+
                         </div>
                         <div class="slider-nav">
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
-                            <div class="item-slick"><img src="https://via.placeholder.com/1200x850" alt="Alt"></div>
+                            {% for image in produit.images %}
+                                <a href="{{ asset('images/' ~ image.nom) }}" class="item-slick">
+                                    <img src="{{ asset('images/' ~ image.nom) }}" alt="Alt">
+                                </a>
+                            {% endfor %}
+
                         </div>
 
                     </div>
@@ -48,12 +42,12 @@
                         <div class="block-header">
                             <h3 class="block-title">Description de : {{ produit.nom }}</h3>
                         </div>
-                            <div class="block-header">
-                                <h4 class="block-title"> {{ produit.categorie.nom }}</h4>
-                            </div>
-                            <div class="block-body">
-                                <p>{{ produit.categorie.description }}
-                            </div>
+                        <div class="block-header">
+                            <h4 class="block-title"> {{ produit.categorie.nom }}</h4>
+                        </div>
+                        <div class="block-body">
+                            <p>{{ produit.categorie.description }}
+                        </div>
                         <div class="block-header">
                             <h4 class="block-title"> {{ produit.nom }}</h4>
                         </div>
@@ -76,9 +70,24 @@
                             <h4><i class="ti-direction"></i>Informations : {{ produit.description }}</h4>
                         </div>
                     </div>
+
+                    <div class="tr-single-box">
+                        <div class="tr-single-header">
+                            <h4><i class="ti-direction"></i>Informations : {{ produit.categorie.description }}</h4>
+                        </div>
+                    </div>
+
+                    <div class="tr-single-box">
+                        <div class="tr-single-body">
+                            <ul class="extra-service">
+                                <li><a href="{{ path('cart_add', {id: produit.id}) }}">
+                                        <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Ajouter au panier</button>
+                                    </a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 
 {% endblock %}

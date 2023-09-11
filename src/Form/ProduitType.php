@@ -7,6 +7,7 @@ use App\Entity\Produit;
 use App\Entity\Promotion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -55,10 +56,12 @@ class ProduitType extends AbstractType
 
             ])*/
 
-            ->add('images', FileType::class, [
-                'label' => 'Image du produit',
+            ->add('images_files', CollectionType::class, [
+                'label' => 'Images du produit',
                 'mapped' => false,
                 'required' => false,
+                'entry_type' => FileType::class,
+                'allow_add' => true,
                 'attr' => [
                     'accept' => 'image/*',
                 ],

@@ -51,19 +51,19 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $imageFile = $form->get('images')->getData();
-            if ($imageFile) {
-                $image = new Image();
-                $fileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-                $image->setNom($fileName);
-                $produit->setImage($image);
-                $entityManager->persist($image);
-            }else{
-                $produit->setImage(null);
+            $imagesFiles = $request->files->get('produit')['images_files'];
+            if (!empty($imagesFiles)) {
+                foreach ($imagesFiles as $imageFile) {
+                    $image = new Image();
+                    $fileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                    $image->setNom($fileName);
+                    $produit->addImage($image);
+                    $entityManager->persist($image);
+                }
             }
 
             $entityManager->persist($produit);
@@ -71,7 +71,7 @@ class ProduitController extends AbstractController
 
             return $this->redirectToRoute('tousproduits');
         }
-
+        dump($form);
         return $this->renderForm('produit/ajoutproduit.html.twig', [
             'form' => $form
         ]);

@@ -24,6 +24,17 @@
 
                 {{ form_start(form) }}
 
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prix) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.categorie) }}
+
+                <input type="file" name="produit[images_files][]" id="produit_image_1" class="form-control" >
+                <input type="file" name="produit[images_files][]" id="produit_image_2" class="form-control" >
+                <input type="file" name="produit[images_files][]" id="produit_image_3" class="form-control" >
+                <input type="file" name="produit[images_files][]" id="produit_image_4" class="form-control" >
+
+                {{ form_row(form.datesortie) }}
                 {{ form_end(form) }}
 
             </div>
