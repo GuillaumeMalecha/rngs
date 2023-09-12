@@ -6,7 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Produit;
 use App\Entity\Promotion;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,28 +42,35 @@ class HomeController extends AbstractController
      * @Route("/recherche", name="recherche")
      */
 
-    public function recherche(EntityManagerInterface $entityManager, PaginationInterface $paginator, Request $request): Response
+    public function recherche(EntityManagerInterface $entityManager, PaginatorInterface $paginator, Request $request): Response
     {
         $repository = $entityManager->getRepository(Categorie::class);
         $listeCategories = $repository->findAll();
+
+        $repository = $entityManager->getRepository(Promotion::class);
+        $listePromotions = $repository->findAll();
 
         $formData = $request->request->all();
 
         $nom = $formData['nom'] ?? null;
         $categorieId = $formData['categorie'] ?? null;
+        $promotion = $formData['promotion'] ?? null;
 
         $repository = $entityManager->getRepository(Produit::class);
-        $listeProduits = $repository->findProduitByNomAndCategorie($nom, $categorieId);
+        $rechercheProduit = $repository->findByRecherche($nom, $categorieId, $promotion);
 
         $pagination = $paginator->paginate(
-            $listeProduits,
+            $rechercheProduit,
             $request->query->getInt('page', 1),
             6
         );
 
         return $this->render('home/recherche.html.twig', [
             'categories' => $listeCategories,
-            'produits' => $pagination,
+            'promotions' => $listePromotions,
+            'noms' => $nom,
+            'rechercheproduit' => $rechercheProduit,
+            'pagination' => $pagination,
         ]);
     }
 }

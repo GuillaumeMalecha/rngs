@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PromotionController extends AbstractController
 {
     /**
-     * @Route("/promotion", name="app_promotion")
+     * @Route("/promotion", name="promotion")
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -22,7 +22,7 @@ class PromotionController extends AbstractController
         $listePromotions = $repository->findAll();
 
         if (!$listePromotions) {
-            return $this->redirectToRoute('app_promotion_ajout');
+            return $this->redirectToRoute('promotion_ajout');
         }
 
         return $this->render('promotion/index.html.twig', [
@@ -32,29 +32,30 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/detailcategorie/{id}/promotion/ajout", name="app_promotion_ajout")
+     * @Route("/detailcategorie/{id}/promotion/ajout", name="promotion_ajout")
      */
     public function ajoutPromotion(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Categorie::class);
-        $prestataire = $repository->find($id);
+        $categorie = $repository->find($id);
         $form = $this->createForm(PromotionType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $promotion = $form->getData();
-            $promotion->setPrestataire($prestataire);
+            $promotion->setPromotion($categorie);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_promotion');
+            return $this->redirectToRoute('promotion');
         }
 
         return $this->render('promotion/ajout.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'PromotionController',
-            'prestataire' => $prestataire,
+            'categorie' => $categorie,
+
         ]);
     }
 

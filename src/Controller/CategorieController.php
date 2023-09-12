@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Promotion;
 use App\Form\CategorieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -60,14 +61,19 @@ class CategorieController extends AbstractController
         $repository = $entityManager->getRepository(Categorie::class);
         $categorie = $repository->find($id);
 
+
+
         if (!$categorie) {
             throw $this->createNotFoundException(
                 'Aucune catégorie trouvée avec le numéro ' . $id
             );
         }
 
+        $promotions = $categorie->getPromotion();
+
         return $this->render('categorie/detail.html.twig', [
             'categorie' => $categorie,
+            'promotions' => $promotions,
         ]);
     }
 

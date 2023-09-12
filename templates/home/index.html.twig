@@ -56,22 +56,30 @@
     <!-- ============================ Fin bandeau flèche =========================== -->
 
 
-    <!-- ============================ Début boucle derniers articles =========================== -->
+    <!-- ============================ Début boucle derniers produits ajoutés =========================== -->
 
 
     <div class="container">
         <div class="row justify-content-center">
             <ul class="col-lg-8 col-md-10">
                 <br>
+                {% for produit in derniersProduits %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom : {{ produit.nom }}</h3>
+                    <p>Description : {{ produit.description }}</p>
+                    <p>Prix : {{ produit.prix }} €</p>
 
+                    <a href="{{ path ("detailproduit", {id:produit.id}) }}">
+                        <button type="button" class="btn btn-light">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+                {% endfor %}
             </ul>
         </div>
     </div>
 
-    <!-- ============================ Fin boucle derniers articles =========================== -->
-
-
-
+    <!-- ============================ Fin boucle derniers produits ajoutés =========================== -->
 
 
     <!-- ============================ Début bandeau liste catégories ================================== -->
@@ -93,8 +101,6 @@
         </div>
     </section>
     <!-- ============================ Fin bandeau liste catégories ================================== -->
-
-
 
 
 

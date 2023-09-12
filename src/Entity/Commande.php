@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commande
 {
+    public const STATUS_COMMAND_PENDING = 'PENDING';
+    public const STATUS_COMMAND_PAID = 'PAID';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -27,7 +29,7 @@ class Commande
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $statuscommande;
+    private $statuscommande = 'PENDING';
 
     /**
      * @ORM\Column(type="date", nullable=true)

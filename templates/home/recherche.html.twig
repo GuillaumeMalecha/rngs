@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de Bien-être{% endblock %}
+
+{% block body %}
+
+    <!-- ============================ Bandeau de Recherche ================================== -->
+
+    <div class="image-cover search-header-banner" style="background:url(https://picsum.photos/1920/1000) no-repeat;"
+         data-overlay="6">
+        <div class="container">
+
+            <div class="full-search-2 italian-search hero-search-radius box-style mb-4">
+                <div class="hero-search-content">
+                    <form class="row" method="POST" action="{{ path('recherche') }}">
+                        <div class="col-lg-4 col-md-4 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" name="nom" class="form-control b-r"
+                                           placeholder="Nom du produit">
+                                    <i class="theme-cl ti-search"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <select id="choose-city" name="promotion" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        {% for promotion in promotions %}
+                                            <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}%</option>
+                                        {% endfor %}
+                                    </select>
+                                    <i class="ti-target"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <select id="list-category" name="categorie" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        {% for categorie in categories %}
+                                            <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <i class="theme-cl ti-list"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <button type="submit" class="btn search-btn">Recherche</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ Fin de la recherche ================================== -->
+
+
+    <!-- ============================ Début des résultats ================================== -->
+
+    <section class="gray-bg">
+
+        <div class="container">
+
+
+            <br>
+            <ul>
+                {% if noms is not null %}
+                    <h2>Votre recherche : {{ noms }}</h2>
+                    {% for prestataire in recherchenom %}
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
+                        <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }}
+                            - {{ prestataire.siteinternet }}</p>
+                        <p>Numéro de TVA : {{ prestataire.numtva }} </p>
+                        <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}">
+                            <button type="button" class="btn btn-warning">En savoir plus</button>
+                        </a>
+                        <br>
+                        <br>
+                    {% endfor %}
+                {% elseif categorieserviceid is not null %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom du prestataire : {{ categorieserviceid.prestataire.nom }}</h3>
+                    <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }}
+                        - {{ prestataire.siteinternet }}</p>
+                    <p>Numéro de TVA : {{ prestataire.numtva }} </p>
+                    <a href="{{ path ("detailprestataire", {id:categorieserviceid.prestataire.id}) }}">
+                        <button type="button" class="btn btn-warning">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+                {% else %}
+                    <h2>Votre recherche de bien-être commence ici.</h2>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}
