@@ -87,6 +87,14 @@
                                                 </div>
                                             </a>
                                         </li>
+
+                                        <li>
+                                            <a href="{{ path('tousproduits') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-list"></i>
+                                                    <h5>Produits<span>Les produits proposés</span></h5>
+                                                </div>
+                                            </a>
                                         {% if is_granted('ROLE_USER') == true %}
 
                                             <li>
@@ -202,23 +210,41 @@
                                             </ul>
                                         </div>
                                     </div>
-
                                 </li>
-
                             </ul>
 
                             {% if is_granted('ROLE_USER') %}
                                 <ul class="attributes attributes-desk ad-two">
-                                    <li class="log-icon lg-ic"><a href="{{ path('panier_show') }}"><i
-                                                    class="ti-shopping-cart"></i></a></li>
+                                    <li class="log-icon lg-ic">
+                                        {% if cartService.total == 0 %}
+                                            <a href="{{ path('panier_show') }}"><i
+                                                        class="ti-shopping-cart"></i>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('panier_show') }}"><i
+                                                        class="ti-shopping-cart-full"></i>
+                                                ({{ cartService.total }}€)
+                                            </a>
+                                        {% endif %}
+                                    </li>
+
                                     <li class="login-attri mid-rb"><a href="" class="br-4">Se
                                             déconnecter</a></li>
                                 </ul>
-
                             {% else %}
                                 <ul class="attributes attributes-desk ad-two">
-                                    <li class="log-icon lg-ic"><a href="{{ path('panier_show') }}"><i
-                                                    class="ti-shopping-cart"></i></a></li>
+                                    <li class="log-icon lg-ic">
+                                        {% if cartService.total == 0 %}
+                                            <a href="{{ path('panier_show') }}"><i
+                                                        class="ti-shopping-cart"></i>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('panier_show') }}"><i
+                                                        class="ti-shopping-cart-full"></i>
+                                                ({{ cartService.total }}€)
+                                            </a>
+                                        {% endif %}
+                                    </li>
                                     <li class="login-attri mid-rb"><a href="" class="br-4">Se
                                             connecter</a></li>
                                 </ul>

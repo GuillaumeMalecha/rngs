@@ -10,32 +10,51 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <h1>Votre panier</h1>
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Produit</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in items %}
+                    {% if items|length == 0 %}
+                        <h3>Le panier est vide.</h3>
+                    {% else %}
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td>{{ item.produit.nom }}</td>
-                                <td>{{ item.produit.prix }} €</td>
-                                <td>{{ item.quantite }}</td>
-                                <td>{{ item.produit.prix * item.quantite }} €</td>
+                                <th scope="col">Produit</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantité</th>
+                                <th scope="col">Total</th>
+                                <th></th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="3">Total</td>
-                            <td>{{ total }} €</td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('detailproduit', {'id': item.produit.id}) }}">
+                                            {{ item.produit.nom }}
+                                        </a>
+                                    </td>
+                                    <td>{{ item.produit.prix }} €</td>
+                                    <td>
+                                        <a href="{{ path('panier_add', {'id': item.produit.id}) }}? returnToCart=true"><i
+                                                    class="fas fa-plus-circle"></i></a>
+                                        {{ item.quantite }}
+                                        <a href="{{ path('panier_decrement', {'id': item.produit.id}) }}"><i
+                                                    class="fas fa-minus-circle"></i></a>
+                                    </td>
+                                    <td>{{ item.total }} €</td>
+                                    <td>
+                                        <a href="{{ path('panier_delete', {'id': item.produit.id}) }}"><i
+                                                    class="fas fa-trash"></i></a>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td colspan="2">{{ total }} €</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
