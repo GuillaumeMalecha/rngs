@@ -1,20 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PromotionController!{% endblock %}
+{% block title %}Liste des promotions actives{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/src/Controller/PromotionController.php'|file_link(0) }}">src/Controller/PromotionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/guill/Symfony/rngs/templates/promotion/index.html.twig'|file_link(0) }}">templates/promotion/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    <h2 class="ipt-title">Toutes les promotions</h2>
+                    <span class="ipn-subtitle">Des économies à portée de main</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <br>
+        <ul>
+            {% for promotion in promotions %}
+                {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
+                    <span class="prt-type rent">Offre active</span>
+                    <h3><i class="fas fa-star"></i> Promotion en cours : {{ promotion.categorie.nom }} -{{ promotion.pourcentage }}% !</h3>
+                    <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
+                        jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailcategorie", {id:promotion.categorie.id}) }}">
+                        <button type="button" class="btn btn-primary">Page de la catégorie</button>
+                    </a>
+
+                    <br>
+                    <br>
+
+                {% endif %}
+            {% endfor %}
+
+            {# Une seconde boucle for pour que les promotions passées se retrouvent bien après les promotions en cours #}
+            {% for promotion in promotions %}
+
+                {% if promotion.datefin < date('today') %}
+
+                    <br>
+                    <h4><i class="fas fa-circle"></i> Trop tard : {{ promotion.categorie.nom }} -{{ promotion.pourcentage }}%</h4>
+                    <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
+                        jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailcategorie", {id:promotion.categorie.id}) }}">
+                        <button type="button" class="btn btn-primary">Page de la catégorie</button>
+                    </a>
+                    <br>
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}

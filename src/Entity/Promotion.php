@@ -35,9 +35,10 @@ class Promotion
     private $pourcentage;
 
     /**
-     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="promotion")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="promotions")
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
      */
-    private $categories;
+    private $categorie;
 
     /**
      * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="promotion")
@@ -91,12 +92,17 @@ class Promotion
         return $this;
     }
 
-    /**
-     * @return Collection<int, categorie>
-     */
-    public function getCategories(): Collection
+
+    public function getCategorie(): ?Categorie
     {
-        return $this->categories;
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 
     public function addCategory(categorie $category): self

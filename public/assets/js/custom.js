@@ -419,7 +419,7 @@ $(function() {
 	
 	// Select Cities
 	$('#choose-city').select2({
-		placeholder: "Selectionnez une ville",
+		placeholder: "Selectionnez une Promotion",
 		allowClear: true
 	});
 	

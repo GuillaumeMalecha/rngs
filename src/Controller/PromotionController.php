@@ -43,7 +43,7 @@ class PromotionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $promotion = $form->getData();
-            $promotion->setPromotion($categorie);
+            $promotion->setCategorie($categorie); // Utilisez setCategorie pour associer la catégorie
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
             $entityManager->flush();
@@ -55,8 +55,8 @@ class PromotionController extends AbstractController
             'form' => $form->createView(),
             'controller_name' => 'PromotionController',
             'categorie' => $categorie,
-
         ]);
     }
+
 
 }
