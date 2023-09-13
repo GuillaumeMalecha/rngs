@@ -66,6 +66,22 @@
 
     <!-- ============================ Fin de la recherche ================================== -->
 
+    <!-- ============================ Début bandeau flèche ================================= -->
+    <section class="theme-bg lttop-title">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="sec-heading center light mb-5">
+                        <h2>Résultats de votre recherche : </h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="title__curve"></div>
+    </section>
+    <!-- ============================ Fin bandeau flèche =================================== -->
 
     <!-- ============================ Début des résultats ================================== -->
 
@@ -77,34 +93,29 @@
             <br>
             <ul>
                 {% if noms is not null %}
-                    <h2>Votre recherche : {{ noms }}</h2>
-                    {% for prestataire in recherchenom %}
+                    {% for produit in rechercheproduit %}
                         <i class="fas fa-bookmark"></i>
-                        <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
-                        <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }}
-                            - {{ prestataire.siteinternet }}</p>
-                        <p>Numéro de TVA : {{ prestataire.numtva }} </p>
-                        <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}">
+                        <h3>Nom du produit : {{ produit.nom }}</h3>
+                        <p>Prix : {{ produit.prix }} €</p>
+                        {% if produit.promotion is not null %}
+                            <p>Promotion : {{ produit.promotion.pourcentage }} %</p>
+                        {% endif %}
+                        <p>Catégorie : {{ produit.categorie.nom }}</p>
+                        <a href="{{ path ("detailproduit", {id:produit.id}) }}">
                             <button type="button" class="btn btn-warning">En savoir plus</button>
                         </a>
                         <br>
                         <br>
                     {% endfor %}
-                {% elseif categorieserviceid is not null %}
-                    <i class="fas fa-bookmark"></i>
-                    <h3>Nom du prestataire : {{ categorieserviceid.prestataire.nom }}</h3>
-                    <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }}
-                        - {{ prestataire.siteinternet }}</p>
-                    <p>Numéro de TVA : {{ prestataire.numtva }} </p>
-                    <a href="{{ path ("detailprestataire", {id:categorieserviceid.prestataire.id}) }}">
-                        <button type="button" class="btn btn-warning">En savoir plus</button>
-                    </a>
-                    <br>
-                    <br>
                 {% else %}
-                    <h2>Votre recherche de bien-être commence ici.</h2>
+                    <h2>Votre quête n'a rien donné, aventurier.</h2>
                 {% endif %}
             </ul>
+        </div>
+
+        {# Pagination #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
         </div>
     </section>
 

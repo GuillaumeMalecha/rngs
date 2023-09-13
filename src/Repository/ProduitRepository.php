@@ -39,6 +39,44 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function find4last()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.nom', 'b', 'p.nom = b.id')
+            ->setMaxResults(4)
+            ->orderBy('b.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
+
+    public function findByRecherche($nom = null, $categorie = null, $promotion = null): array
+    {
+        $query = $this->createQueryBuilder('p');
+        if ($nom != null) {
+            $query->andWhere('p.nom LIKE :nom')
+                ->setParameter('nom', '%' . $nom . '%');
+        }
+        if ($promotion != null) {
+            $query->andWhere('p.promotion = :promotion')
+                ->setParameter('promotion', $promotion);
+        }
+        if ($categorie != null) {
+            $query->andWhere('p.categorie = :categorie')
+                ->setParameter('categorie', $categorie);
+        }
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

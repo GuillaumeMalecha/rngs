@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(Produit::class);
         $listeProduits = $repository->findAll();
 
-        $derniersProduits = $repository->findBy([], ['id' => 'DESC'], 5);
+        $derniersProduits = $repository->findBy([], ['id' => 'DESC'], 4);
 
         $repository = $entityManager->getRepository(Promotion::class);
         $listePromotions = $repository->findAll();
@@ -62,7 +62,7 @@ class HomeController extends AbstractController
         $pagination = $paginator->paginate(
             $rechercheProduit,
             $request->query->getInt('page', 1),
-            6
+            5
         );
 
         return $this->render('home/recherche.html.twig', [
