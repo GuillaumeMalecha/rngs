@@ -6,7 +6,7 @@
 
     <!-- ============================ Bandeau de Recherche ================================== -->
 
-    <div class="image-cover search-header-banner" style="background:url(https://picsum.photos/1920/1000) no-repeat;"
+    <div class="image-cover search-header-banner" style="background:url(/assets/img/decorfloatingisland.png) no-repeat;"
          data-overlay="6">
         <div class="container">
 
@@ -92,8 +92,7 @@
 
             <br>
             <ul>
-                {% if noms is not null %}
-                    {% for produit in rechercheproduit %}
+                    {% for produit in pagination %}
                         <i class="fas fa-bookmark"></i>
                         <h3>Nom du produit : {{ produit.nom }}</h3>
                         <p>Prix : {{ produit.prix }} €</p>
@@ -107,9 +106,6 @@
                         <br>
                         <br>
                     {% endfor %}
-                {% else %}
-                    <h2>Votre quête n'a rien donné, aventurier.</h2>
-                {% endif %}
             </ul>
         </div>
 
@@ -117,6 +113,7 @@
         <div class="navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
+
     </section>
 
 {% endblock %}
