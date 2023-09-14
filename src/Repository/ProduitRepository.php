@@ -58,22 +58,28 @@ class ProduitRepository extends ServiceEntityRepository
     public function findByRecherche($nom = null, $categorie = null, $promotion = null): array
     {
         $query = $this->createQueryBuilder('p');
+
         if ($nom != null) {
             $query->andWhere('p.nom LIKE :nom')
                 ->setParameter('nom', '%' . $nom . '%');
         }
+
         if ($promotion != null) {
-            $query->andWhere('p.promotion = :promotion')
+            $query->leftJoin('p.categorie', 'c');
+            $query->andWhere('c.id = :promotion')
                 ->setParameter('promotion', $promotion);
         }
+
         if ($categorie != null) {
             $query->andWhere('p.categorie = :categorie')
                 ->setParameter('categorie', $categorie);
         }
+
         return $query
             ->getQuery()
             ->getResult();
     }
+
 
 
 
