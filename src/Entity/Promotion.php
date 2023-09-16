@@ -41,7 +41,7 @@ class Promotion
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="promotions")
      */
     private $produits;
 
@@ -109,7 +109,7 @@ class Promotion
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->setPromotion($this);
+            $category->setPromotions($this);
         }
 
         return $this;
@@ -119,8 +119,8 @@ class Promotion
     {
         if ($this->categories->removeElement($category)) {
             // set the owning side to null (unless already changed)
-            if ($category->getPromotion() === $this) {
-                $category->setPromotion(null);
+            if ($category->getPromotions() === $this) {
+                $category->setPromotions(null);
             }
         }
 

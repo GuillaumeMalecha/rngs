@@ -27,11 +27,11 @@
                         <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <select id="choose-city" name="promotion" class="form-control">
+                                    <select id="choose-city" name="promotions" class="form-control">
                                         <option value="">&nbsp;</option>
-                                        {% for promotion in promotions %}
-                                            {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
-                                                <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}%
+                                        {% for promotions in promotions %}
+                                            {% if promotions.datedebut <= date('today') and promotions.datefin >= date('today') %}
+                                                <option value="{{ promotions.id }}">-{{ promotions.pourcentage }}%
                                                 </option>
                                             {% endif %}
                                         {% endfor %}

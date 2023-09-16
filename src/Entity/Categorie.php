@@ -30,9 +30,9 @@ class Categorie
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="categories")
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="categorie")
      */
-    private $promotion;
+    private $promotions;
 
     /**
      * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie")
@@ -73,14 +73,17 @@ class Categorie
         return $this;
     }
 
-    public function getPromotion(): ?Promotion
+    /**
+     * @return Collection<int, promotion>
+     */
+    public function getPromotions(): Collection
     {
-        return $this->promotion;
+        return $this->promotions;
     }
 
-    public function setPromotion(?Promotion $promotion): self
+    public function setPromotions(?Promotion $promotions): self
     {
-        $this->promotion = $promotion;
+        $this->promotions = $promotions;
 
         return $this;
     }

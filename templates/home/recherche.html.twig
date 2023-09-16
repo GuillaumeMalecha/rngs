@@ -26,10 +26,10 @@
                         <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <select id="choose-city" name="promotion" class="form-control">
+                                    <select id="choose-city" name="promotions" class="form-control">
                                         <option value="">&nbsp;</option>
-                                        {% for promotion in promotions %}
-                                            <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}%</option>
+                                        {% for promotions in promotions %}
+                                            <option value="{{ promotions.id }}">-{{ promotions.pourcentage }}%</option>
                                         {% endfor %}
                                     </select>
                                     <i class="ti-target"></i>
@@ -96,8 +96,8 @@
                         <i class="fas fa-bookmark"></i>
                         <h3>Nom du produit : {{ produit.nom }}</h3>
                         <p>Prix : {{ produit.prix }} €</p>
-                        {% if produit.promotion is not null %}
-                            <p>Promotion : {{ produit.promotion.pourcentage }} %</p>
+                        {% if produit.promotions is not null %}
+                            <p>Promotion : {{ produit.promotions.pourcentage }} %</p>
                         {% endif %}
                         <p>Catégorie : {{ produit.categorie.nom }}</p>
                         <a href="{{ path ("detailproduit", {id:produit.id}) }}">

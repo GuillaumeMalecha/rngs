@@ -47,11 +47,11 @@ class ProduitType extends AbstractType
                     'placeholder' => 'jj/mm/aaaa'],
             ])
             //->add('produits_commandes')
-            /*->add('promotion', EntityType::class, [
+            /*->add('promotions', EntityType::class, [
                 'class' => Promotion::class,
                 'choice_label' => 'nom',
                 'label' => 'Promotion : ',
-                'placeholder' => 'Choisir une promotion',
+                'placeholder' => 'Choisir une promotions',
                 'required' => false,
 
             ])*/

@@ -44,7 +44,7 @@ final class Version20230508142230 extends AbstractMigration
         $this->addSql('ALTER TABLE langue ADD CONSTRAINT FK_9357758E2E68C17 FOREIGN KEY (produits_langues_id) REFERENCES produit_langue (id)');
         $this->addSql('CREATE INDEX IDX_9357758E2E68C17 ON langue (produits_langues_id)');
         $this->addSql('ALTER TABLE produit ADD promotion_id INT DEFAULT NULL, ADD categorie_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27139DF194 FOREIGN KEY (promotion_id) REFERENCES promotion (id)');
+        $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27139DF194 FOREIGN KEY (promotion_id) REFERENCES promotions (id)');
         $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27BCF5E72D FOREIGN KEY (categorie_id) REFERENCES categorie (id)');
         $this->addSql('CREATE INDEX IDX_29A5EC27139DF194 ON produit (promotion_id)');
         $this->addSql('CREATE INDEX IDX_29A5EC27BCF5E72D ON produit (categorie_id)');

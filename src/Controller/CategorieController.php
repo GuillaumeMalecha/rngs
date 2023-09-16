@@ -69,11 +69,14 @@ class CategorieController extends AbstractController
             );
         }
 
-        $promotions = $categorie->getPromotion();
+        $promotions = $categorie->getPromotions();
+        $produits = $categorie->getProduits();
+
 
         return $this->render('categorie/detail.html.twig', [
             'categorie' => $categorie,
             'promotions' => $promotions,
+            'produits' => $produits,
         ]);
     }
 

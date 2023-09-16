@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PromotionController extends AbstractController
 {
     /**
-     * @Route("/promotion", name="promotion")
+     * @Route("/promotions", name="promotions")
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -32,7 +32,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/detailcategorie/{id}/promotion/ajout", name="promotion_ajout")
+     * @Route("/detailcategorie/{id}/promotions/ajout", name="promotion_ajout")
      */
     public function ajoutPromotion(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {

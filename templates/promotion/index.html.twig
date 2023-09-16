@@ -20,14 +20,14 @@
     <div class="container">
         <br>
         <ul>
-            {% for promotion in promotions %}
-                {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
+            {% for promotions in promotions %}
+                {% if promotions.datedebut <= date('today') and promotions.datefin >= date('today') %}
                     <span class="prt-type rent">Offre active</span>
-                    <h3><i class="fas fa-star"></i> Promotion en cours : {{ promotion.categorie.nom }} -{{ promotion.pourcentage }}% !</h3>
-                    <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
-                    <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
-                        jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
-                    <a href="{{ path ("detailcategorie", {id:promotion.categorie.id}) }}">
+                    <h3><i class="fas fa-star"></i> Promotion en cours : {{ promotions.categorie.nom }} -{{ promotions.pourcentage }}% !</h3>
+                    <p>-{{ promotions.pourcentage }}% sur les {{ promotions.categorie.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotions.datedebut|date('d/m/Y') }}
+                        jusqu'au {{ promotions.datefin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailcategorie", {id:promotions.categorie.id}) }}">
                         <button type="button" class="btn btn-primary">Page de la catégorie</button>
                     </a>
 
@@ -38,16 +38,16 @@
             {% endfor %}
 
             {# Une seconde boucle for pour que les promotions passées se retrouvent bien après les promotions en cours #}
-            {% for promotion in promotions %}
+            {% for promotions in promotions %}
 
-                {% if promotion.datefin < date('today') %}
+                {% if promotions.datefin < date('today') %}
 
                     <br>
-                    <h4><i class="fas fa-circle"></i> Trop tard : {{ promotion.categorie.nom }} -{{ promotion.pourcentage }}%</h4>
-                    <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
-                    <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
-                        jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
-                    <a href="{{ path ("detailcategorie", {id:promotion.categorie.id}) }}">
+                    <h4><i class="fas fa-circle"></i> Trop tard : {{ promotions.categorie.nom }} -{{ promotions.pourcentage }}%</h4>
+                    <p>-{{ promotions.pourcentage }}% sur les {{ promotions.categorie.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotions.datedebut|date('d/m/Y') }}
+                        jusqu'au {{ promotions.datefin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailcategorie", {id:promotions.categorie.id}) }}">
                         <button type="button" class="btn btn-primary">Page de la catégorie</button>
                     </a>
                     <br>

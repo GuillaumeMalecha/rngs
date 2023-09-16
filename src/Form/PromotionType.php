@@ -16,10 +16,10 @@ class PromotionType extends AbstractType
     {
         $builder
             ->add('pourcentage', IntegerType::class, [
-                'label' => 'Pourcentage de la promotion : '
+                'label' => 'Pourcentage de la promotions : '
             ])
             ->add('datedebut', DateType::class, [
-                'label' => 'Date de début de la promotion : ',
+                'label' => 'Date de début de la promotions : ',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
@@ -29,7 +29,7 @@ class PromotionType extends AbstractType
                 ],
             ])
             ->add('datefin', DateType::class, [
-                'label' => 'Date de fin de la promotion : ',
+                'label' => 'Date de fin de la promotions : ',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',

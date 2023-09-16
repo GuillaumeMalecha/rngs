@@ -66,8 +66,8 @@ class ProduitRepository extends ServiceEntityRepository
 
         if ($promotion != null) {
             $query->leftJoin('p.categorie', 'c');
-            $query->andWhere('c.id = :promotion')
-                ->setParameter('promotion', $promotion);
+            $query->andWhere('c.id = :promotions')
+                ->setParameter('promotions', $promotion);
         }
 
         if ($categorie != null) {

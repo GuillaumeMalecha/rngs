@@ -21,7 +21,7 @@ class CategorieType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description de la catégorie : '
             ])
-            //->add('promotion')
+            //->add('promotions')
             ->add('Enregistrer', SubmitType::class);
 
         ;
