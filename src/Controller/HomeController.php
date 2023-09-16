@@ -53,11 +53,11 @@ class HomeController extends AbstractController
         $formData = $request->request->all();
 
         $nom = $formData['nom'] ?? null;
-        $categorieId = $formData['categorie'] ?? null;
-        $promotion = $formData['promotions'] ?? null;
+        $categorie = $formData['categorie'] ?? null;
+        $promotion = $formData['promotion'] ?? null;
 
         $repository = $entityManager->getRepository(Produit::class);
-        $rechercheProduit = $repository->findByRecherche($nom, $categorieId, $promotion);
+        $rechercheProduit = $repository->findByRecherche($nom, $categorie, $promotion);
 
         $pagination = $paginator->paginate(
             $rechercheProduit,

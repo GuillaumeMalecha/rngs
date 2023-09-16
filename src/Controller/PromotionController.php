@@ -48,7 +48,7 @@ class PromotionController extends AbstractController
             $entityManager->persist($promotion);
             $entityManager->flush();
 
-            return $this->redirectToRoute('promotion');
+            return $this->redirectToRoute('promotions');
         }
 
         return $this->render('promotion/ajout.html.twig', [
