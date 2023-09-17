@@ -15,13 +15,18 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
                     <div class="loving-modern-login">
-                        <h3>S'inscrire pour votre bien-être</h3>
+                        <h3>S'inscrire sur notre Shop</h3>
                         <div class="row main_login_form">
                             <div class="login_form_dm">
 
                                 {{ form_start(registrationForm) }}
                                 {{ form_row(registrationForm.email) }}
                                 {{ form_row(registrationForm.plainPassword) }}
+
+                                {{ form_row(registrationForm.nom) }}
+                                {{ form_row(registrationForm.prenom) }}
+                                {{ form_row(registrationForm.typeutilisateur) }}
+                                {{ form_row(registrationForm.nomutilisateur) }}
 
                                 {{ form_row(registrationForm.agreeTerms, {
                                     label : 'Accepter les conditions d\'utilisation'}) }}

@@ -25,17 +25,17 @@ class Client
     private $newsletter;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephone;
 
     /**
-     * @ORM\OneToMany(targetEntity=adresse::class, mappedBy="client")
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="client")
      */
     private $adresses;
 
     /**
-     * @ORM\OneToMany(targetEntity=commande::class, mappedBy="client")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="client")
      */
     private $commandes;
 

@@ -51,14 +51,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $nomutilisateur;
 
     /**
-     * @ORM\OneToOne(targetEntity=vendeur::class, inversedBy="utilisateur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Vendeur::class, inversedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $vendeurs;
 
     /**
-     * @ORM\OneToOne(targetEntity=client::class, inversedBy="utilisateur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $clients;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $typeutilisateur;
 
     public function getId(): ?int
     {
@@ -205,6 +210,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClients(?client $clients): self
     {
         $this->clients = $clients;
+
+        return $this;
+    }
+
+    public function getTypeutilisateur(): ?string
+    {
+        return $this->typeutilisateur;
+    }
+
+    public function setTypeutilisateur(string $typeutilisateur): self
+    {
+        $this->typeutilisateur = $typeutilisateur;
 
         return $this;
     }

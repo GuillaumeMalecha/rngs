@@ -98,7 +98,7 @@
                                         {% if is_granted('ROLE_USER') == true %}
 
                                             <li>
-                                                <a href="{{ path('app_promotion') }}">
+                                                <a href="{{ path('promotions') }}">
                                                     <div class="mg-menu-items">
                                                         <i class="lni-ticket"></i>
                                                         <h5>Les promotions<span>Les réductions du moment</span></h5>
@@ -228,7 +228,7 @@
                                         {% endif %}
                                     </li>
 
-                                    <li class="login-attri mid-rb"><a href="" class="br-4">Se
+                                    <li class="login-attri mid-rb"><a href="{{ path('app_logout') }}" class="br-4">Se
                                             déconnecter</a></li>
                                 </ul>
                             {% else %}
@@ -245,7 +245,7 @@
                                             </a>
                                         {% endif %}
                                     </li>
-                                    <li class="login-attri mid-rb"><a href="" class="br-4">Se
+                                    <li class="login-attri mid-rb"><a href="{{ path('app_login') }}" class="br-4">Se
                                             connecter</a></li>
                                 </ul>
                             {% endif %}

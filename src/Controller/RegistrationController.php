@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Utilisateur;
-use App\Form\RegistrationFormType;
+use App\Entity\Vendeur;
+use App\Form\RegistrationType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -32,8 +34,7 @@ class RegistrationController extends AbstractController
     {
         $user = new Utilisateur();
 
-        $user->setRoles(['ROLE_USER']);
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,15 +50,15 @@ class RegistrationController extends AbstractController
             $userProfileType = $form->get('typeutilisateur')->getData();
 
             // Create the appropriate user profile based on the selected type
-            if ($userProfileType === 'prestataire') {
-                $userProfile = 'prestataire';
-                $routeinscription = 'ajoutprestataire';
-            } elseif ($userProfileType === 'internaute') {
-                $userProfile = 'internaute';
-                $routeinscription = 'ajoutinternaute';
-
+            if ($userProfileType === 'vendeur') {
+                $userProfile = 'vendeur';
+                $user->setRoles(['ROLE_VENDEUR']);
+            } elseif ($userProfileType === 'client') {
+                $userProfile = 'client';
+                $user->setRoles(['ROLE_USER']);
             }
 
+            $user->setTypeutilisateur((string)$userProfile);
 
             // encode the plain password
             $user->setPassword(
@@ -75,16 +76,18 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('bonjour@bienetre.be', 'Votre Bien Être'))
+                    ->from(new Address('hello@rngs.com', 'Votre inscription sur RNGS'))
                     ->to($user->getEmail())
                     ->subject('Merci de confirmer votre adresse email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
+            if ($userProfileType === 'vendeur') {
+                return $this->redirectToRoute('ajoutvendeur', ['userId' => $user->getId()]);
+            } elseif ($userProfileType === 'client') {
+                return $this->redirectToRoute('ajoutclient', ['userId' => $user->getId()]);
+            }
 
-
-            return $this->redirectToRoute($routeinscription, [
-                'userId' => $user->getId()]);
         }
 
         return $this->render('registration/register.html.twig', [

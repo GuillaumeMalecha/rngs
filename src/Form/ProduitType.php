@@ -57,7 +57,7 @@ class ProduitType extends AbstractType
             ])*/
 
             ->add('images_files', CollectionType::class, [
-                'label' => 'Images du produit',
+                'label' => '',
                 'mapped' => false,
                 'required' => false,
                 'entry_type' => FileType::class,

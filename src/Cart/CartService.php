@@ -101,4 +101,5 @@ class CartService
 
         $this->session->set('panier', $panier);
     }
+
 }

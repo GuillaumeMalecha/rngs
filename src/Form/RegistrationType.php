@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\CodePostal;
-use App\Entity\Commune;
-use App\Entity\Localite;
+
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +17,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -29,6 +27,37 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'off',
                     'placeholder' => 'Adresse email'
+                ]
+            ])
+            ->add('typeutilisateur', ChoiceType::class, [
+                'label' => 'Je m\'inscris en tant que :',
+                'choices' => [
+                    'Je suis un vendeur' => 'vendeur',
+                    'Je suis un client' => 'client'
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'required' => true,
+            ])
+            ->add('nom', null, [
+                'label' => ' ',
+                'attr' => [
+                    'autocomplete' => 'off',
+                    'placeholder' => 'Nom'
+                ]
+            ])
+            ->add('prenom', null, [
+                'label' => ' ',
+                'attr' => [
+                    'autocomplete' => 'off',
+                    'placeholder' => 'Prénom'
+                ]
+            ])
+            ->add('nomutilisateur', null, [
+                'label' => ' ',
+                'attr' => [
+                    'autocomplete' => 'off',
+                    'placeholder' => 'Nom d\'utilisateur'
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
