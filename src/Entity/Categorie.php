@@ -42,6 +42,7 @@ class Categorie
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId(): ?int
