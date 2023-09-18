@@ -81,13 +81,36 @@
                         <div class="tr-single-body">
                             <ul class="extra-service">
                                 <li><a href="{{ path('panier_add', {id: produit.id}) }}">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Ajouter au panier</button>
+                                        <button type="button" class="btn btn-primary"><i
+                                                    class="fas fa-shopping-cart"></i> Ajouter au panier
+                                        </button>
                                     </a></li>
                             </ul>
                         </div>
                     </div>
+
+
+                    {% if is_granted('ROLE_VENDEUR') == true or is_granted('ROLE_ADMIN') %}
+                        <div class="tr-single-box">
+                            <div class="tr-single-header">
+                                <a href="{{ path('modifierproduit', {id: produit.id}) }}">
+                                    <button type="button" class="btn btn-info">Modifier le produit</button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="tr-single-box">
+                            <div class="tr-single-header">
+                                <a href="{{ path('supprimerproduit', {id: produit.id}) }}">
+                                    <button type="button" class="btn btn-danger">Supprimer le produit</button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+
                 </div>
-            </div>
     </section>
 
 {% endblock %}

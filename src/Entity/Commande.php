@@ -52,7 +52,7 @@ class Commande
     private $client;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ProduitCommande::class, inversedBy="commandes")
+     * @ORM\OneToMany(targetEntity=ProduitCommande::class, mappedBy="commandes")
      */
     private $produits_commandes;
 

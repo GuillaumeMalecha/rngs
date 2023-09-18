@@ -15,15 +15,21 @@
                         <h2>{{ categorie.nom }} </h2>
                         <p>Description : {{ categorie.description }}</p>
 
+                        {% if is_granted('ROLE_VENDEUR') == true or is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('modifiercategorie', {id: categorie.id}) }}">
                             <button type="button" class="btn btn-info">Modifier la catégorie</button>
                         </a>
+                        <a href="{{ path('promotion_ajout', {id: categorie.id}) }}">
+                            <button type="button" class="btn btn-success">Ajouter une promotion</button>
+                        </a>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('supprimercategorie', {id: categorie.id}) }}">
                             <button type="button" class="btn btn-danger">Supprimer la catégorie</button>
                         </a>
-                        <a href="{{ path('promotion_ajout', {id: categorie.id}) }}">
-                            <button type="button" class="btn btn-success">Ajouter une promotions</button>
-                        </a>
+                        {% endif %}
+
 
                     </div>
                 </div>

@@ -62,19 +62,10 @@
                                     <a href="JavaScript:Void(0);">Explorer</a>
                                     <ul class="dropdown-menu lg-wt">
                                         <li>
-                                            <a href="">
+                                            <a href="{{ path('home') }}">
                                                 <div class="mg-menu-items">
                                                     <i class="lni-search"></i>
                                                     <h5>Recherche<span>Parmi toute la boutique</span></h5>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="">
-                                                <div class="mg-menu-items">
-                                                    <i class="lni-apartment"></i>
-                                                    <h5>Constructeurs<span>Liste des principaux acteurs</span></h5>
                                                 </div>
                                             </a>
                                         </li>
@@ -107,6 +98,7 @@
                                             </li>
                                         {% endif %}
 
+                                        {% if is_granted('ROLE_VENDEUR') == true or is_granted('ROLE_ADMIN') %}
                                         <li>
                                             <a href="{{ path('ajoutcategorie') }}">
                                                 <div class="mg-menu-items">
@@ -126,6 +118,7 @@
                                                 </div>
                                             </a>
                                         </li>
+                                        {% endif %}
 
 
                                     </ul>
@@ -276,9 +269,9 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6">
                                     <div class="footer-widget">
-                                        <img src="{{ asset('assets/img/bienetre2023.png') }}" class="img-fluid f-logo"
+                                        <img src="{{ asset('assets/img/rngslogo.png') }}" class="img-fluid f-logo"
                                              alt=""/>
-                                        <p>Rue Saint-Laurent<br>Liège - Belgique</p>
+                                        <p>Rue de la Régence<br>Liège - Belgique</p>
                                         <ul class="footer-bottom-social">
                                             <li><a href="www.facebook.com"><i class="ti-facebook"></i></a></li>
                                             <li><a href="www.twitter.com"><i class="ti-twitter"></i></a></li>

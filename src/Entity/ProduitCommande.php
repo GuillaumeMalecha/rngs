@@ -20,79 +20,96 @@ class ProduitCommande
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produits_commandes")
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="produits_commandes")
      */
-    private $commandes;
+    private $commande;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Produit::class, mappedBy="produits_commandes")
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="produits_commandes")
      */
-    private $produits;
+    private $produit;
 
-    public function __construct()
-    {
-        $this->commandes = new ArrayCollection();
-        $this->produits = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $produitNom;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $prix;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
+    public function getCommande(): Commande
     {
-        return $this->commandes;
+        return $this->commande;
     }
 
-    public function addCommande(Commande $commande): self
+    public function setCommande(Commande $commande): self
     {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->addProduitsCommande($this);
-        }
+        $this->commande = $commande;
 
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
+
+    public function getProduit(): Produit
     {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeProduitsCommande($this);
-        }
+        return $this->produit;
+
+    }
+
+    public function setProduit(Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getProduits(): Collection
+    public function getProduitNom(): ?string
     {
-        return $this->produits;
+        return $this->produitNom;
     }
 
-    public function addProduit(Produit $produit): self
+    public function setProduitNom(string $produitNom): self
     {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->addProduitsCommande($this);
-        }
+        $this->produitNom = $produitNom;
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): self
+    public function getQuantite(): ?int
     {
-        if ($this->produits->removeElement($produit)) {
-            $produit->removeProduitsCommande($this);
-        }
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }
 
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
 
 }

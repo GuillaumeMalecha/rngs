@@ -20,4 +20,14 @@ class CartItem
         return $this->produit->getPrix() * $this->quantite;
     }
 
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
 }

@@ -8,6 +8,7 @@ use App\Entity\Produit;
 use App\Form\ProduitType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,8 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/ajoutproduit", name="ajoutproduit")
+     * @IsGranted("ROLE_VENDEUR", message="Vous devez être vendeur pour accéder à cette page")
+     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
      */
 
     public function ajoutproduit(Request $request, EntityManagerInterface $entityManager): Response
@@ -97,6 +100,7 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("//detailproduit/{id}/supprimer", name="supprimerproduit")
+     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
      */
 
     public function supprimerproduit(int $id, EntityManagerInterface $entityManager)
@@ -112,6 +116,7 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/detailproduit/{id}/modifier", name="modifierproduit")
+     * @IsGranted("ROLE_VENDEUR", message="Vous devez être vendeur pour accéder à cette page")
      */
 
     public function modifierproduit(int $id, Request $request, EntityManagerInterface $entityManager)

@@ -24,7 +24,7 @@ class VendeurController extends AbstractController
         $user = $repository->find($userId);
         $vendeur = new Vendeur();
 
-        $form = $this->createForm(VendeurType::class, $user);
+        $form = $this->createForm(VendeurType::class, $vendeur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -32,11 +32,11 @@ class VendeurController extends AbstractController
             $entityManager->persist($vendeur);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/ajoutvendeur.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 

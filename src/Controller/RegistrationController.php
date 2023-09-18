@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_VENDEUR']);
             } elseif ($userProfileType === 'client') {
                 $userProfile = 'client';
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(['ROLE_CLIENT']);
             }
 
             $user->setTypeutilisateur((string)$userProfile);

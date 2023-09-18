@@ -40,7 +40,7 @@ class Produit
     private $datesortie;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ProduitCommande::class, inversedBy="produits")
+     * @ORM\OneToMany(targetEntity=ProduitCommande::class, mappedBy="produits")
      */
     private $produits_commandes;
 

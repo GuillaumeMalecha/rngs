@@ -33,6 +33,8 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/ajoutcategorie", name="ajoutcategorie")
+     * @IsGranted("ROLE_VENDEUR", message="Vous devez être vendeur pour accéder à cette page")
+     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
      */
 
     public function ajoutcategorie(Request $request, EntityManagerInterface $entityManager): Response
@@ -82,6 +84,8 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/detailcategorie/{id}/modifier", name="modifiercategorie")
+     * @IsGranted("ROLE_VENDEUR", message="Vous devez être vendeur pour accéder à cette page")
+     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
      */
 
     public function modifiercategorie(int $id, EntityManagerInterface $entityManager, Request $request)
@@ -106,6 +110,7 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/detailcategorie/{id}/supprimer", name="supprimercategorie")
+     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
      */
 
     public function supprimercategorie(int $id, EntityManagerInterface $entityManager)
