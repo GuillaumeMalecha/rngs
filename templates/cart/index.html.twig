@@ -53,6 +53,11 @@
                             </tr>
                             </tfoot>
                         </table>
+
+                        <form action="{{ path('panier_checkout') }}" method="post">
+                            <button type="submit" class="btn btn-primary">Passer la commande</button>
+                        </form>
+
                     {% endif %}
 
                 </div>

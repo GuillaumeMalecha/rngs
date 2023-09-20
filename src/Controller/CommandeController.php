@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Cart\CartService;
+use App\Entity\Client;
 use App\Entity\Commande;
 use App\Entity\ProduitCommande;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,37 +18,36 @@ use Symfony\Component\Security\Core\Security;
 class CommandeController extends AbstractController
 {
     /**
-     * @Route("/panier/checkout", name="panier_checkout")
+     * @Route("/panier/checkout", name="panier_checkout", methods={"POST"})
      */
-    public function checkout(CartService $cartService, EntityManagerInterface $entityManager)
+
+    public function checkout(CartService $cartService, EntityManagerInterface $entityManager, Security $security)
     {
         // Récupérez l'utilisateur connecté
-        $user = $this->getUser();
+        $user = $security->getUser();
 
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
-        }
+        $client = $user->getClients();
 
         // Créez une nouvelle instance de la commande
         $commande = new Commande();
-        $commande->setClient($user);
-        $commande->setDateCommande(new \DateTime()); // Définissez la date de la commande
+        $commande->setClient($client);
+        $commande->setDateCommande(new \DateTime('now')); // Définissez la date de la commande
 
         // Récupérez les produits actuels dans le panier de l'utilisateur
         $panier = $cartService->getDetailPanier();
 
         // Ajoutez chaque produit du panier à la commande
-        foreach ($panier as $item) {
+        foreach ($panier as $cartItem) {
             $produitCommande = new ProduitCommande();
-            $produitCommande->setProduit($item['produit']);
-            $produitCommande->setQuantite($item['quantite']);
-            $produitCommande->setPrix($item['produit']->getPrix()); // Utilisez le prix du produit
+            $produitCommande->setProduit($cartItem->getProduit());
+            $produitCommande->setQuantite($cartItem->getQuantite());
+            $produitCommande->setPrix($cartItem->getProduit()->getPrix());
 
             // Assurez-vous de gérer correctement les relations entre Commande et ProduitCommande
             $commande->addProduitsCommande($produitCommande);
 
             // Supprimez le produit du panier après l'ajout à la commande (facultatif)
-            $cartService->delete($item['produit']->getId());
+            $cartService->delete($cartItem->getProduit()->getId());
         }
 
         // Enregistrez la commande dans la base de données
@@ -57,6 +59,31 @@ class CommandeController extends AbstractController
 
         // Redirigez l'utilisateur vers une page de confirmation de commande ou ailleurs
         return $this->redirectToRoute('confirmation_commande', ['id' => $commande->getId()]);
+    }
+
+    /**
+     * @Route("/commande/{id}", name="confirmation_commande")
+     */
+
+    public function confirmationCommande($id, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Commande::class);
+        $commande = $repository->find($id);
+
+        if (!$commande) {
+            return $this->redirectToRoute('home');
+        }
+
+        // Calcul du total de la commande
+        $totalCommande = 0;
+        foreach ($commande->getProduitsCommandes() as $produitCommande) {
+            $totalCommande += $produitCommande->getPrix() * $produitCommande->getQuantite();
+        }
+
+        return $this->render('commande/confirmation.html.twig', [
+            'commande' => $commande,
+            'totalCommande' => $totalCommande,
+        ]);
     }
 
 

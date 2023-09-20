@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations de la commande {{ commande.id }}{% endblock %}
+
+{% block body %}
+    <section class="grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <h1>Votre commande a été passée avec succès</h1>
+                    <p>Merci d'avoir effectué votre commande chez nous. Voici les détails de votre commande :</p>
+
+                    <h2>Informations sur la commande</h2>
+                    <ul>
+                        <li><strong>ID de la commande :</strong> {{ commande.id }}</li>
+                        <li><strong>Date de la commande :</strong> {{ commande.dateCommande|date('d/m/Y H:i:s') }}</li>
+                        <!-- Ajoutez d'autres informations sur la commande ici -->
+                    </ul>
+
+                    <h2>Produits commandés</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nom du produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produitCommande in commande.produitsCommandes %}
+                            <tr>
+                                <td>{{ produitCommande.produit.nom }}</td>
+                                <td>{{ produitCommande.quantite }}</td>
+                                <td>{{ produitCommande.prix }} €</td>
+                                <td>{{ produitCommande.prix * produitCommande.quantite }} €</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <h2>Total de la commande</h2>
+                    <p><strong>Total :</strong> {{ totalCommande }} €</p>
+                    <!-- Vous devrez calculer le total de la commande dans le contrôleur et le transmettre à cette vue -->
+
+                    <!-- Ajoutez d'autres informations sur la commande ici -->
+
+                    <p>Merci encore pour votre commande. Si vous avez des questions ou des préoccupations, n'hésitez pas à <a href="{{ path('contact') }}">nous contacter</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

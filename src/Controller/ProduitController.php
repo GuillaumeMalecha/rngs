@@ -42,8 +42,7 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/ajoutproduit", name="ajoutproduit")
-     * @IsGranted("ROLE_VENDEUR", message="Vous devez être vendeur pour accéder à cette page")
-     * @IsGranted("ROLE_ADMIN", message="Vous devez être admin pour accéder à cette page")
+     * @IsGranted("ROLE_VENDEUR")
      */
 
     public function ajoutproduit(Request $request, EntityManagerInterface $entityManager): Response
