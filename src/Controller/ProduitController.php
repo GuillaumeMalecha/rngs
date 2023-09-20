@@ -88,12 +88,27 @@ class ProduitController extends AbstractController
         $repository = $entityManager->getRepository(Produit::class);
         $produit = $repository->find($id);
 
+        if (!$produit) {
+            throw $this->createNotFoundException('Le produit avec l\'identifiant ' . $id . ' n\'existe pas.');
+        }
+
         $repository = $entityManager->getRepository(Categorie::class);
         $categorie = $repository->find(['id' => $produit->getCategorie()]);
 
+        // Vérifiez s'il y a une promotion active pour cette catégorie
+        $promotion = $categorie->getPromotions()->first(); // Vous pouvez ajuster cette logique pour gérer plusieurs promotions par catégorie
+
+        if ($promotion && $promotion->getDatedebut() <= new \DateTime('today') && $promotion->getDatefin() >= new \DateTime('today')) {
+            // Promotion active, calculez le nouveau prix du produit
+            $pourcentageReduction = $promotion->getPourcentage();
+            $prixInitial = $produit->getPrix();
+            $nouveauPrix = $prixInitial - ($prixInitial * ($pourcentageReduction / 100));
+            $produit->setPrix($nouveauPrix);
+        }
+
         return $this->render('produit/detailproduit.html.twig', [
             'produit' => $produit,
-            'categorie' => $categorie
+            'categorie' => $categorie,
         ]);
     }
 

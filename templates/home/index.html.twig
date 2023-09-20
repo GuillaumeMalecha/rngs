@@ -69,37 +69,84 @@
 
     <!-- ============================ Fin de la recherche ================================== -->
 
+    <!-- ============================ Début du slider de photos ============================ -->
+    <section>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="sec-heading center">
+                        <h2>Photos récentes</h2>
+                        <p>Les photos de nos derniers produits ajoutés.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="owl-carousel owl-theme" id="lists-slide">
+
+                    {% for produit in derniersProduits %}
+                        <div class="list-slide-box">
+                            <div class="modern-list ml-2">
+                                <div class="grid-category-thumb">
+                                    {% if produit.images|length > 0 %}
+                                        <a href="{{ asset('images/' ~ produit.images[0].nom) }}" class="mfp-gallery overlay-cate">
+                                            <img src="{{ asset('images/' ~ produit.images[0].nom) }}" class="img-responsive" alt=""/>
+                                        </a>
+                                    {% else %}
+                                        <!-- Si aucune image n'est associée au produit, vous pouvez afficher une image par défaut ou un message. -->
+                                        <p>Aucune image disponible.</p>
+                                    {% endif %}
+                                    <div class="property_meta">
+                                        <h4 class="lst-title">
+                                            <a href="{{ path ("detailproduit", {id:produit.id}) }}">{{ produit.nom }}</a>
+                                            <span class="veryfied-author"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
 
 
-    <!-- ============================ Début Catégorie du mois ============================= -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ Fin du slider de photos ============================== -->
+
+
+
+    <!-- ============================ Début Promotion du moment ============================= -->
     <section class="gray-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <ul class="col-lg-8 col-md-10">
                     <div class="sec-heading center">
-                        <h2>Ce mois-ci :</h2>
+                        <h2>En ce moment :</h2>
                     </div>
-                    {% for categorie in categories %}
-
-
-                        <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
-                        <h2>Catégorie mise en avant : {{ categorie.nom }}</h2>
-                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                            <button type="button" class="btn btn-primary">En savoir plus</button>
-                        </a>
-                        <a href="{{ path ("toutescategories") }}">
-                            <button type="button" class="btn btn-secondary">Toutes les catégories</button>
-                        </a>
-                        <br>
-                        <br>
-
+                    {% for promotion in promotions %}
+                        {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
+                            <i class="fas fa-bookmark"></i><span class="prt-type rent">Offre active</span>
+                            <h3><i class="fas fa-star"></i> Promotion du moment : {{ promotion.categorie.nom }} - {{ promotion.pourcentage }}% !</h3>
+                            <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
+                            <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
+                                jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
+                            <a href="{{ path ("detailcategorie", {id: promotion.categorie.id}) }}">
+                                <button type="button" class="btn btn-primary">Page de la catégorie</button>
+                            </a>
+                            <br>
+                            <br>
+                        {% endif %}
                     {% endfor %}
-
                 </ul>
             </div>
         </div>
     </section>
-    <!-- ============================ Fin Catégorie du mois ============================= -->
+
+    <!-- ============================ Fin Promotion du moment ============================= -->
 
 
     <!-- ============================ Début bandeau flèche ========================== -->

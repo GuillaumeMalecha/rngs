@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(Produit::class);
         $listeProduits = $repository->findAll();
 
-        $derniersProduits = $repository->findBy([], ['id' => 'DESC'], 4);
+        $derniersProduits = $repository->findBy([], ['id' => 'DESC'], 6);
 
         $repository = $entityManager->getRepository(Promotion::class);
         $listePromotions = $repository->findAll();

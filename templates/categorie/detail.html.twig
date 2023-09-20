@@ -43,6 +43,8 @@
 
     </section>
     <section class="theme-bg lttop-title">
+
+
         <div class="container">
 
             <div class="row">
@@ -65,7 +67,7 @@
                 {% for produit in produits %}
                     <i class="fas fa-bookmark"></i>
                     <h3>Nom du produit : {{ produit.nom }}</h3>
-                    <p>Prix : {{ produit.prix }} €</p>
+                    <p>Description : {{ produit.description }}</p>
                     <p>Catégorie : {{ produit.categorie.nom }}</p>
                     <a href="{{ path ("detailproduit", {id:produit.id}) }}">
                         <button type="button" class="btn btn-warning">En savoir plus</button>

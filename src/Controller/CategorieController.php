@@ -26,10 +26,28 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute('ajoutcategorie');
         }
 
+        // Créez un tableau pour stocker les catégories avec promotions actives
+        $categoriesAvecPromotion = [];
+
+        foreach ($listeCategories as $categorie) {
+            // Vérifiez s'il y a une promotion active pour cette catégorie
+            $promotion = $categorie->getPromotions()->first(); // Vous pouvez ajuster cette logique pour gérer plusieurs promotions par catégorie
+
+            if ($promotion && $promotion->getDatedebut() <= new \DateTime('today') && $promotion->getDatefin() >= new \DateTime('today')) {
+                // Promotion active, ajoutez la catégorie au tableau
+                $categoriesAvecPromotion[] = [
+                    'categorie' => $categorie,
+                    'promotion' => $promotion,
+                ];
+            }
+        }
+
         return $this->render('categorie/index.html.twig', [
             'categories' => $listeCategories,
+            'categoriesAvecPromotion' => $categoriesAvecPromotion, // Passez les catégories avec promotions à votre modèle Twig
         ]);
     }
+
 
     /**
      * @Route("/ajoutcategorie", name="ajoutcategorie")
