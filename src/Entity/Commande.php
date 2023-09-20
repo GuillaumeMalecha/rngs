@@ -52,7 +52,7 @@ class Commande
     private $client;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProduitCommande::class, mappedBy="commandes")
+     * @ORM\OneToMany(targetEntity=ProduitCommande::class, mappedBy="commande")
      */
     private $produits_commandes;
 
@@ -139,14 +139,14 @@ class Commande
     }
 
     /**
-     * @return Collection<int, produitcommande>
+     * @return Collection<int, ProduitCommande>
      */
     public function getProduitsCommandes(): Collection
     {
         return $this->produits_commandes;
     }
 
-    public function addProduitsCommande(produitcommande $produitsCommande): self
+    public function addProduitsCommande(ProduitCommande $produitsCommande): self
     {
         if (!$this->produits_commandes->contains($produitsCommande)) {
             $this->produits_commandes[] = $produitsCommande;
@@ -155,7 +155,7 @@ class Commande
         return $this;
     }
 
-    public function removeProduitsCommande(produitcommande $produitsCommande): self
+    public function removeProduitsCommande(ProduitCommande $produitsCommande): self
     {
         $this->produits_commandes->removeElement($produitsCommande);
 

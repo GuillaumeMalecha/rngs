@@ -31,10 +31,13 @@ class CommandeController extends AbstractController
         // Créez une nouvelle instance de la commande
         $commande = new Commande();
         $commande->setClient($client);
-        $commande->setDateCommande(new \DateTime('now')); // Définissez la date de la commande
+        $commande->setDateCommande(new \DateTime('now'));
+        $commande->setStatuspaiement('en attente');
+        $commande->setStatuscommande('en cours');
 
         // Récupérez les produits actuels dans le panier de l'utilisateur
         $panier = $cartService->getDetailPanier();
+
 
         // Ajoutez chaque produit du panier à la commande
         foreach ($panier as $cartItem) {
@@ -42,12 +45,17 @@ class CommandeController extends AbstractController
             $produitCommande->setProduit($cartItem->getProduit());
             $produitCommande->setQuantite($cartItem->getQuantite());
             $produitCommande->setPrix($cartItem->getProduit()->getPrix());
+            $produitCommande->setCommande($commande);
+            $produitCommande->setProduitNom($cartItem->getProduit()->getNom());
+
+            $entityManager->persist($produitCommande);
 
             // Assurez-vous de gérer correctement les relations entre Commande et ProduitCommande
             $commande->addProduitsCommande($produitCommande);
 
             // Supprimez le produit du panier après l'ajout à la commande (facultatif)
-            $cartService->delete($cartItem->getProduit()->getId());
+            //$cartService->delete($cartItem->getProduit()->getId());
+
         }
 
         // Enregistrez la commande dans la base de données
@@ -65,10 +73,8 @@ class CommandeController extends AbstractController
      * @Route("/commande/{id}", name="confirmation_commande")
      */
 
-    public function confirmationCommande($id, EntityManagerInterface $entityManager): Response
+    public function confirmationCommande($id, EntityManagerInterface $entityManager, Commande $commande): Response
     {
-        $repository = $entityManager->getRepository(Commande::class);
-        $commande = $repository->find($id);
 
         if (!$commande) {
             return $this->redirectToRoute('home');
