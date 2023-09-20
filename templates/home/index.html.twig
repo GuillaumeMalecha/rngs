@@ -131,7 +131,7 @@
                     <i class="fas fa-bookmark"></i>
                     <h3>Nom : {{ produit.nom }}</h3>
                     <p>Description : {{ produit.description }}</p>
-                    <p>Prix : {{ produit.prix }} €</p>
+                    <p>Prix : {{ produit.prix /100 }} €</p>
 
                     <a href="{{ path ("detailproduit", {id:produit.id}) }}">
                         <button type="button" class="btn btn-light">En savoir plus</button>

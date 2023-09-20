@@ -43,7 +43,7 @@
                             <ul class="dropdown-menu">
                                 <div class="mg-menu-items">
                                     <li>
-                                        <a href="" class="active">Consulter mon profil</a>
+                                        <a href="{{ path('app_profil') }}" class="active">Consulter mon profil</a>
                                     </li>
                                 </div>
 
@@ -216,7 +216,7 @@
                                         {% else %}
                                             <a href="{{ path('panier_show') }}"><i
                                                         class="ti-shopping-cart-full"></i>
-                                                ({{ cartService.total }}€)
+                                                ({{ cartService.total /100 }}€)
                                             </a>
                                         {% endif %}
                                     </li>

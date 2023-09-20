@@ -67,13 +67,19 @@
 
                     <div class="tr-single-box">
                         <div class="tr-single-header">
-                            <h4><i class="ti-direction"></i>Informations : {{ produit.description }}</h4>
+                            <h4><i class="ti-tag"></i>Prix : €{{ produit.prix /100 }}</h4>
                         </div>
                     </div>
 
                     <div class="tr-single-box">
                         <div class="tr-single-header">
-                            <h4><i class="ti-direction"></i>Informations : {{ produit.categorie.description }}</h4>
+                            <p><i class=""></i>{{ produit.description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="tr-single-box">
+                        <div class="tr-single-header">
+                            <p><i class=""></i>{{ produit.categorie.description }}</p>
                         </div>
                     </div>
 

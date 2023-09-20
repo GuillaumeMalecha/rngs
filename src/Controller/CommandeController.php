@@ -21,12 +21,14 @@ class CommandeController extends AbstractController
      * @Route("/panier/checkout", name="panier_checkout", methods={"POST"})
      */
 
-    public function checkout(CartService $cartService, EntityManagerInterface $entityManager, Security $security)
+    public function checkout(CartService $cartService, EntityManagerInterface $entityManager, Security $security, Request $request)
     {
         // Récupérez l'utilisateur connecté
         $user = $security->getUser();
 
         $client = $user->getClients();
+
+
 
         // Créez une nouvelle instance de la commande
         $commande = new Commande();
@@ -37,6 +39,12 @@ class CommandeController extends AbstractController
 
         // Récupérez les produits actuels dans le panier de l'utilisateur
         $panier = $cartService->getDetailPanier();
+
+        // Récupérez les données de paiement à partir de la requête
+        $donneePaiement = $request->request->get('donneepaiement');
+
+        // Configurez la commande avec les données de paiement
+        $commande->setDonneepaiement($donneePaiement);
 
 
         // Ajoutez chaque produit du panier à la commande
@@ -54,7 +62,7 @@ class CommandeController extends AbstractController
             $commande->addProduitsCommande($produitCommande);
 
             // Supprimez le produit du panier après l'ajout à la commande (facultatif)
-            //$cartService->delete($cartItem->getProduit()->getId());
+            $cartService->delete($cartItem->getProduit()->getId());
 
         }
 
@@ -70,10 +78,10 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commande/{id}", name="confirmation_commande")
+     * @Route("/commande/{id}", name="detailcommande")
      */
 
-    public function confirmationCommande($id, EntityManagerInterface $entityManager, Commande $commande): Response
+    public function detailCommande($id, EntityManagerInterface $entityManager, Commande $commande): Response
     {
 
         if (!$commande) {
@@ -86,7 +94,7 @@ class CommandeController extends AbstractController
             $totalCommande += $produitCommande->getPrix() * $produitCommande->getQuantite();
         }
 
-        return $this->render('commande/confirmation.html.twig', [
+        return $this->render('commande/detail.html.twig', [
             'commande' => $commande,
             'totalCommande' => $totalCommande,
         ]);

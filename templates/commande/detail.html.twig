@@ -3,21 +3,32 @@
 {% block title %}Informations de la commande {{ commande.id }}{% endblock %}
 
 {% block body %}
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <h2 class="ipt-title">Votre commande</h2>
+                    <span class="ipn-subtitle">Merci d'avoir effectué votre commande chez nous. Voici les détails de votre commande.</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="grey">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <h1>Votre commande a été passée avec succès</h1>
-                    <p>Merci d'avoir effectué votre commande chez nous. Voici les détails de votre commande :</p>
 
-                    <h2>Informations sur la commande</h2>
+                    <h3>Informations sur la commande</h3>
                     <ul>
                         <li><strong>ID de la commande :</strong> {{ commande.id }}</li>
                         <li><strong>Date de la commande :</strong> {{ commande.dateCommande|date('d/m/Y H:i:s') }}</li>
-                        <!-- Ajoutez d'autres informations sur la commande ici -->
+                        <li><strong>Statut de la commande :</strong> {{ commande.statuscommande }}</li>
                     </ul>
 
-                    <h2>Produits commandés</h2>
+                    <h3>Produits commandés</h3>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -32,18 +43,19 @@
                             <tr>
                                 <td>{{ produitCommande.produit.nom }}</td>
                                 <td>{{ produitCommande.quantite }}</td>
-                                <td>{{ produitCommande.prix }} €</td>
-                                <td>{{ produitCommande.prix * produitCommande.quantite }} €</td>
+                                <td>{{ produitCommande.prix /100 }} €</td>
+                                <td>{{ (produitCommande.prix * produitCommande.quantite) /100 }} €</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
-                    <h2>Total de la commande</h2>
-                    <p><strong>Total :</strong> {{ totalCommande }} €</p>
-                    <!-- Vous devrez calculer le total de la commande dans le contrôleur et le transmettre à cette vue -->
+                    <h3>Total de la commande</h3>
+                    <p><strong>Total :</strong> {{ totalCommande /100 }} €</p>
 
-                    <!-- Ajoutez d'autres informations sur la commande ici -->
+                    <h3>Données bancaires</h3>
+                    <p><strong>Numéro de compte :</strong> {{ commande.donneepaiement }}</p>
+
 
                 </div>
             </div>

@@ -95,7 +95,7 @@
                 {% for produit in pagination %}
                     <i class="fas fa-bookmark"></i>
                     <h3>Nom du produit : {{ produit.nom }}</h3>
-                    <p>Prix : {{ produit.prix }} €</p>
+                    <p>Prix : {{ produit.prix /100 }} €</p>
                     <p>Description : {{ produit.description }}</p>
                     {% if produit.categorie is not null %}
                         {% for promotion in produit.categorie.promotions %}
