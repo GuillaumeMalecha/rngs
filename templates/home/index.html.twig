@@ -31,7 +31,7 @@
                                         <option value="">&nbsp;</option>
                                         {% for promotion in promotions %}
                                             {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
-                                                <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}%</option>
+                                                <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}% sur {{ promotion.categorie.nom }}</option>
                                             {% endif %}
                                         {% endfor %}
                                     </select>
