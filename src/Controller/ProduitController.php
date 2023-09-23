@@ -73,7 +73,6 @@ class ProduitController extends AbstractController
 
             return $this->redirectToRoute('tousproduits');
         }
-        dump($form);
         return $this->renderForm('produit/ajoutproduit.html.twig', [
             'form' => $form
         ]);
