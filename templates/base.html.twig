@@ -285,11 +285,11 @@
                                         <h4 class="widget-title">Votre profil</h4>
                                         <ul class="footer-menu">
                                             {% if is_granted('ROLE_USER') %}
-                                                <li><a href="">Se déconnecter</a></li>
+                                                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
                                             {% else %}
-                                                <li><a href="">Se connecter</a></li>
+                                                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
                                             {% endif %}
-                                            <li><a href="">Profil</a></li>
+                                            <li><a href="{{ path('app_profil') }}">Profil</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -298,20 +298,20 @@
                                     <div class="footer-widget">
                                         <h4 class="widget-title">Essentiels</h4>
                                         <ul class="footer-menu">
-                                            <li><a href="">Catégories</a></li>
-                                            <li><a href="">Promotions</a></li>
-                                            <li><a href="">Stages</a></li>
+                                            <li><a href="{{ path('toutescategories') }}">Catégories</a></li>
+                                            <li><a href="{{ path('promotions') }}">Promotions</a></li>
+                                            <li><a href="{{ path('tousproduits') }}">Produits</a></li>
                                         </ul>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-md-4">
                                     <div class="footer-widget">
-                                        <h4 class="widget-title">Bien-Être</h4>
+                                        <h4 class="widget-title">La boutique</h4>
                                         <ul class="footer-menu">
                                             <li><a href="">À propos</a></li>
                                             <li><a href="">Carte</a></li>
-                                            <li><a href="">Recherche</a></li>
+                                            <li><a href="{{ path('recherche') }}">Recherche</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -320,8 +320,7 @@
                                     <div class="footer-widget">
                                         <h4 class="widget-title">Liens utiles</h4>
                                         <ul class="footer-menu">
-                                            <li><a href="">Prestataires</a></li>
-                                            <li><a href="">Contactez-nous</a></li>
+                                            <li><a href="{{ path('contact') }}">Contactez-nous</a></li>
                                             <li><a href="">Vie privée</a></li>
                                         </ul>
                                     </div>
