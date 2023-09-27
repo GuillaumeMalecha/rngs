@@ -43,7 +43,14 @@ class PromotionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $promotion = $form->getData();
-            $promotion->setCategorie($categorie); // Utilisez setCategorie pour associer la catégorie
+
+            // Vérification de la date de début et de fin de promotion
+            if ($promotion->getDateDebut() >= $promotion->getDateFin()) {
+                $this->addFlash('error', 'La date de début doit être avant la date de fin.');
+                return $this->redirectToRoute('promotion_ajout', ['id' => $id]);
+            }
+
+            $promotion->setCategorie($categorie);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
             $entityManager->flush();

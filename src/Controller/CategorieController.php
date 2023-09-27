@@ -61,6 +61,17 @@ class CategorieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nomCategorie = $form->get('nom')->getData();
+
+            // Vérification que le nom de la catégorie n'existe pas déjà
+            $existingCategorie = $entityManager->getRepository(Categorie::class)->findOneBy(['nom' => $nomCategorie]);
+
+            if ($existingCategorie) {
+                $this->addFlash('danger', 'Cette catégorie existe déjà.');
+                return $this->redirectToRoute('ajoutcategorie');
+            }
+
+            // Si le nom de la catégorie est unique, continuez avec la création de la catégorie
             $entityManager->persist($categorie);
             $entityManager->flush();
             return $this->redirectToRoute('toutescategories');
