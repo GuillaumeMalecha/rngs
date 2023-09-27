@@ -93,22 +93,24 @@
             <br>
             <ul>
                 {% for produit in pagination %}
-                    <i class="fas fa-bookmark"></i>
-                    <h3>Nom du produit : {{ produit.nom }}</h3>
-                    <p>Prix : {{ produit.prix /100 }} €</p>
-                    <p>Description : {{ produit.description }}</p>
-                    {% if produit.categorie is not null %}
-                        {% for promotion in produit.categorie.promotions %}
-                            <p>Promotion : {{ promotion.pourcentage }} %</p>
-                        {% endfor %}
-                    {% endif %}
+                    <li>
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Nom du produit : {{ produit.nom }}</h3>
+                        <p>Prix : {{ produit.prix /100 }} €</p>
+                        <p>Description : {{ produit.description }}</p>
+                        {% if produit.categorie is not null %}
+                            {% for promotion in produit.categorie.promotions %}
+                                <p>Promotion : {{ promotion.pourcentage }} %</p>
+                            {% endfor %}
+                        {% endif %}
 
-                    <p>Catégorie : {{ produit.categorie.nom }}</p>
-                    <a href="{{ path ("detailproduit", {id:produit.id}) }}">
-                        <button type="button" class="btn btn-warning">En savoir plus</button>
-                    </a>
-                    <br>
-                    <br>
+                        <p>Catégorie : {{ produit.categorie.nom }}</p>
+                        <a href="{{ path ("detailproduit", {id:produit.id}) }}">
+                            <button type="button" class="btn btn-warning">En savoir plus</button>
+                        </a>
+                        <br>
+                        <br>
+                    </li>
                 {% endfor %}
             </ul>
         </div>

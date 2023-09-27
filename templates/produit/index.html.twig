@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <h2 class="ipt-title">Tous les Produits</h2>
-                    <span class="ipn-subtitle">Une liste qui vous aidera à trouver le service à votre service.</span>
+                    <span class="ipn-subtitle">Une liste pour les consulter tous.</span>
                 </div>
             </div>
         </div>
@@ -18,17 +18,18 @@
         <div class="container">
             <br>
             <ul>
-                {# Boucle d'affichage des prestataires #}
                 {% for produit in pagination %}
-                    <i class="fas fa-bookmark"></i>
-                    <h3>Nom du produit : {{ produit.nom }}</h3>
-                    <p>Description : {{ produit.description }}</p>
+                    <li>
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Nom du produit : {{ produit.nom }}</h3>
+                        <p>Description : {{ produit.description }}</p>
 
-                    <a href="{{ path ("detailproduit", {id:produit.id}) }}">
-                        <button type="button" class="btn btn-theme">En savoir plus</button>
-                    </a>
-                    <br>
-                    <br>
+                        <a href="{{ path ("detailproduit", {id:produit.id}) }}">
+                            <button type="button" class="btn btn-theme">En savoir plus</button>
+                        </a>
+                        <br>
+                        <br>
+                    </li>
                 {% endfor %}
             </ul>
         </div>

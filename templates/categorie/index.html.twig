@@ -20,15 +20,18 @@
         <div class="row justify-content-center">
             <ul class="col-lg-8 col-md-10">
                 {% for categorieWithPromotion in categoriesAvecPromotion %}
-                    <i class="fas fa-star"></i>
-                    <h3>Catégorie de produit en promotion : {{ categorieWithPromotion.categorie.nom }}</h3>
-                    <p>{{ categorieWithPromotion.categorie.description }}</p>
-                    <p>Promotion du moment : {{ categorieWithPromotion.promotion.pourcentage }}% de réduction !</p>
-                    <p>Promotion valable à partir du {{ categorieWithPromotion.promotion.datedebut|date('d/m/Y') }} jusqu'au {{ categorieWithPromotion.promotion.datefin|date('d/m/Y') }}.</p>
-                    <a href="{{ path ("detailcategorie", {id:categorieWithPromotion.categorie.id}) }}">
-                        <button type="button" class="btn btn-secondary">En savoir plus</button>
-                    </a>
-                    <hr>
+                    <li>
+                        <i class="fas fa-star"></i>
+                        <h3>Catégorie de produit en promotion : {{ categorieWithPromotion.categorie.nom }}</h3>
+                        <p>{{ categorieWithPromotion.categorie.description }}</p>
+                        <p>Promotion du moment : {{ categorieWithPromotion.promotion.pourcentage }}% de réduction !</p>
+                        <p>Promotion valable à partir du {{ categorieWithPromotion.promotion.datedebut|date('d/m/Y') }}
+                            jusqu'au {{ categorieWithPromotion.promotion.datefin|date('d/m/Y') }}.</p>
+                        <a href="{{ path ("detailcategorie", {id:categorieWithPromotion.categorie.id}) }}">
+                            <button type="button" class="btn btn-secondary">En savoir plus</button>
+                        </a>
+                        <hr>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -40,15 +43,15 @@
             <ul class="col-lg-8 col-md-10">
 
                 {% for categorie in categories %}
-
-                <i class="fas fa-bookmark"></i>
-                <h4>Catégorie de produit : {{ categorie.nom }}</h4>
-                <p>{{ categorie.description }}</p>
-                <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                    <button type="button" class="btn btn-secondary">En savoir plus</button>
-                </a>
-                <hr>
-
+                    <li>
+                        <i class="fas fa-bookmark"></i>
+                        <h4>Catégorie de produit : {{ categorie.nom }}</h4>
+                        <p>{{ categorie.description }}</p>
+                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                            <button type="button" class="btn btn-secondary">En savoir plus</button>
+                        </a>
+                        <hr>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
