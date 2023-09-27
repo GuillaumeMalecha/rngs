@@ -29,10 +29,10 @@
                     <div class="nav-header">
                         <a href="{{ path('home') }}" class="brand normal-logo"><img
                                     src="{{ asset('assets/img/rngslogo.png') }}"
-                                    alt=""/></a>
+                                    alt="Logo du site"/></a>
                         <a href="{{ path('home') }}" class="brand brand-overlay"><img
                                     src="{{ asset('assets/img/rngslogo.png') }}"
-                                    alt=""/></a>
+                                    alt="Logo du site"/></a>
                         <button class="toggle-bar"><span class="ti-align-justify"></span></button>
                     </div>
                     <ul class="menu">
@@ -51,11 +51,9 @@
                                 <li class="dropdown">
                                     <a href="JavaScript:Void(0);" class="active">S'inscrire</a>
                                     <ul class="dropdown-menu">
-                                        <div class="mg-menu-items">
-                                            <li>
+                                            <li class="mg-menu-items">
                                                 <a href="{{ path('app_register') }}" class="active">Créer mon profil</a>
                                             </li>
-                                        </div>
                                         {% endif %}
                                     </ul>
                                 <li class="dropdown">
@@ -136,9 +134,7 @@
                                             </a>
                                         </li>
 
-                                        {# <li class="dropdown">
-                                    <a href="JavaScript:Void(0);">Réseaux Sociaux</a>
-                                    <ul class="dropdown-menu lg-wt"> #}
+
                                         <li>
                                             <a href="www.instagram.com">
                                                 <div class="mg-menu-items">
@@ -171,8 +167,6 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        {# </ul>
-                                </li> #}
                                     </ul>
                                 </li>
 
@@ -206,7 +200,7 @@
                                 </li>
                             </ul>
 
-                            {% if is_granted('ROLE_USER') %}
+                            {% if is_granted('ROLE_CLIENT') %}
                                 <ul class="attributes attributes-desk ad-two">
                                     <li class="log-icon lg-ic">
                                         {% if cartService.total == 0 %}
@@ -227,16 +221,6 @@
                             {% else %}
                                 <ul class="attributes attributes-desk ad-two">
                                     <li class="log-icon lg-ic">
-                                        {% if cartService.total == 0 %}
-                                            <a href="{{ path('panier_show') }}"><i
-                                                        class="ti-shopping-cart"></i>
-                                            </a>
-                                        {% else %}
-                                            <a href="{{ path('panier_show') }}"><i
-                                                        class="ti-shopping-cart-full"></i>
-                                                ({{ cartService.total }}€)
-                                            </a>
-                                        {% endif %}
                                     </li>
                                     <li class="login-attri mid-rb"><a href="{{ path('app_login') }}" class="br-4">Se
                                             connecter</a></li>
@@ -265,12 +249,11 @@
                 <div>
                     <div class="container">
                         <div class="col-lg-12">
-
                             <div class="row">
                                 <div class="col-lg-4 col-md-6">
                                     <div class="footer-widget">
                                         <img src="{{ asset('assets/img/rngslogo.png') }}" class="img-fluid f-logo"
-                                             alt=""/>
+                                             alt="Logo du site"/>
                                         <p>Rue de la Régence<br>Liège - Belgique</p>
                                         <ul class="footer-bottom-social">
                                             <li><a href="www.facebook.com"><i class="ti-facebook"></i></a></li>

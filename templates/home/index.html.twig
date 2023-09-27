@@ -31,7 +31,8 @@
                                         <option value="">&nbsp;</option>
                                         {% for promotion in promotions %}
                                             {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
-                                                <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}% sur {{ promotion.categorie.nom }}</option>
+                                                <option value="{{ promotion.id }}">-{{ promotion.pourcentage }}%
+                                                    sur {{ promotion.categorie.nom }}</option>
                                             {% endif %}
                                         {% endfor %}
                                     </select>
@@ -90,8 +91,10 @@
                             <div class="modern-list ml-2">
                                 <div class="grid-category-thumb">
                                     {% if produit.images|length > 0 %}
-                                        <a href="{{ asset('images/' ~ produit.images[0].nom) }}" class="mfp-gallery overlay-cate">
-                                            <img src="{{ asset('images/' ~ produit.images[0].nom) }}" class="img-responsive" alt=""/>
+                                        <a href="{{ asset('images/' ~ produit.images[0].nom) }}"
+                                           class="mfp-gallery overlay-cate">
+                                            <img src="{{ asset('images/' ~ produit.images[0].nom) }}"
+                                                 class="img-responsive" alt="Image du produit"/>
                                         </a>
                                     {% else %}
                                         <!-- Si aucune image n'est associée au produit, vous pouvez afficher une image par défaut ou un message. -->
@@ -109,7 +112,6 @@
                     {% endfor %}
 
 
-
                 </div>
             </div>
         </div>
@@ -124,23 +126,26 @@
         <div class="container">
             <div class="row justify-content-center">
                 <ul class="col-lg-8 col-md-10">
-                    <div class="sec-heading center">
-                        <h2>En ce moment :</h2>
-                    </div>
-                    {% for promotion in promotions %}
-                        {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
-                            <i class="fas fa-bookmark"></i><span class="prt-type rent">Offre active</span>
-                            <h3><i class="fas fa-star"></i> Promotion du moment : {{ promotion.categorie.nom }} - {{ promotion.pourcentage }}% !</h3>
-                            <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
-                            <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
-                                jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
-                            <a href="{{ path ("detailcategorie", {id: promotion.categorie.id}) }}">
-                                <button type="button" class="btn btn-primary">Page de la catégorie</button>
-                            </a>
-                            <br>
-                            <br>
-                        {% endif %}
-                    {% endfor %}
+                    <li>
+                        <div class="sec-heading center">
+                            <h2>En ce moment :</h2>
+                        </div>
+                        {% for promotion in promotions %}
+                            {% if promotion.datedebut <= date('today') and promotion.datefin >= date('today') %}
+                                <i class="fas fa-bookmark"></i><span class="prt-type rent">Offre active</span>
+                                <h3><i class="fas fa-star"></i> Promotion du moment : {{ promotion.categorie.nom }}
+                                    - {{ promotion.pourcentage }}% !</h3>
+                                <p>-{{ promotion.pourcentage }}% sur les {{ promotion.categorie.nom }}.</p>
+                                <p>Promotion valable à partir du {{ promotion.datedebut|date('d/m/Y') }}
+                                    jusqu'au {{ promotion.datefin|date('d/m/Y') }}.</p>
+                                <a href="{{ path ("detailcategorie", {id: promotion.categorie.id}) }}">
+                                    <button type="button" class="btn btn-primary">Page de la catégorie</button>
+                                </a>
+                                <br>
+                                <br>
+                            {% endif %}
+                        {% endfor %}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -173,6 +178,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <ul class="col-lg-8 col-md-10">
+                <li>
                 <br>
                 {% for produit in derniersProduits %}
                     <i class="fas fa-bookmark"></i>
@@ -186,6 +192,7 @@
                     <br>
                     <br>
                 {% endfor %}
+                </li>
             </ul>
         </div>
     </div>
