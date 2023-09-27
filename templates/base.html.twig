@@ -41,19 +41,19 @@
                         <li class="dropdown">
                             <a href="JavaScript:Void(0);" class="active">Profil</a>
                             <ul class="dropdown-menu">
-                                <div class="mg-menu-items">
-                                    <li>
+                                <li>
+                                    <div class="mg-menu-items">
                                         <a href="{{ path('app_profil') }}" class="active">Consulter mon profil</a>
-                                    </li>
-                                </div>
+                                    </div>
+                                </li>
 
                                 {% else %}
                                 <li class="dropdown">
                                     <a href="JavaScript:Void(0);" class="active">S'inscrire</a>
                                     <ul class="dropdown-menu">
-                                            <li class="mg-menu-items">
-                                                <a href="{{ path('app_register') }}" class="active">Créer mon profil</a>
-                                            </li>
+                                        <li class="mg-menu-items">
+                                            <a href="{{ path('app_register') }}" class="active">Créer mon profil</a>
+                                        </li>
                                         {% endif %}
                                     </ul>
                                 <li class="dropdown">
@@ -84,38 +84,39 @@
                                                     <h5>Produits<span>Les produits proposés</span></h5>
                                                 </div>
                                             </a>
-                                        {% if is_granted('ROLE_USER') == true %}
+                                            {% if is_granted('ROLE_USER') == true %}
 
-                                            <li>
-                                                <a href="{{ path('promotions') }}">
-                                                    <div class="mg-menu-items">
-                                                        <i class="lni-ticket"></i>
-                                                        <h5>Les promotions<span>Les réductions du moment</span></h5>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                        <li>
+                                            <a href="{{ path('promotions') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-ticket"></i>
+                                                    <h5>Les promotions<span>Les réductions du moment</span></h5>
+                                                </div>
+                                            </a>
+                                        </li>
                                         {% endif %}
 
                                         {% if is_granted('ROLE_VENDEUR') == true or is_granted('ROLE_ADMIN') %}
-                                        <li>
-                                            <a href="{{ path('ajoutcategorie') }}">
-                                                <div class="mg-menu-items">
-                                                    <i class="lni-crown"></i>
-                                                    <h5>Ajoutez une catégorie<span>Un nouveau type de produit</span>
-                                                    </h5>
-                                                </div>
-                                            </a>
-                                        </li>
+                                            <li>
+                                                <a href="{{ path('ajoutcategorie') }}">
+                                                    <div class="mg-menu-items">
+                                                        <i class="lni-crown"></i>
+                                                        <h5>Ajoutez une catégorie<span>Un nouveau type de produit</span>
+                                                        </h5>
+                                                    </div>
+                                                </a>
+                                            </li>
 
-                                        <li>
-                                            <a href="{{ path('ajoutproduit') }}">
-                                                <div class="mg-menu-items">
-                                                    <i class="lni-crown"></i>
-                                                    <h5>Ajoutez un produit<span>Un nouvel article sur le store</span>
-                                                    </h5>
-                                                </div>
-                                            </a>
-                                        </li>
+                                            <li>
+                                                <a href="{{ path('ajoutproduit') }}">
+                                                    <div class="mg-menu-items">
+                                                        <i class="lni-crown"></i>
+                                                        <h5>Ajoutez un
+                                                            produit<span>Un nouvel article sur le store</span>
+                                                        </h5>
+                                                    </div>
+                                                </a>
+                                            </li>
                                         {% endif %}
 
 
