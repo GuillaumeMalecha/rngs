@@ -74,7 +74,7 @@ class CommandeController extends AbstractController
         $this->addFlash('success', 'Votre commande a été passée avec succès.');
 
         // Redirigez l'utilisateur vers une page de confirmation de commande ou ailleurs
-        return $this->redirectToRoute('confirmation_commande', ['id' => $commande->getId()]);
+        return $this->redirectToRoute('detailcommande', ['id' => $commande->getId()]);
     }
 
     /**
