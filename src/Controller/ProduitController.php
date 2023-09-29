@@ -112,7 +112,7 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("//detailproduit/{id}/supprimer", name="supprimerproduit")
+     * @Route("/detailproduit/{id}/supprimer", name="supprimerproduit")
      */
 
     public function supprimerproduit(int $id, EntityManagerInterface $entityManager)
