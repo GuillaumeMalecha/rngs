@@ -50,6 +50,11 @@ class PromotionController extends AbstractController
                 return $this->redirectToRoute('promotion_ajout', ['id' => $id]);
             }
 
+            if ($promotion->getPourcentage() <= 0) {
+                $this->addFlash('error', 'Le pourcentage de la promotion doit être supérieur à zéro.');
+                return $this->redirectToRoute('promotion_ajout', ['id' => $id]);
+            }
+
             $promotion->setCategorie($categorie);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
