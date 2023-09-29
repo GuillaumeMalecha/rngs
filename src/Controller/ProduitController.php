@@ -115,7 +115,7 @@ class ProduitController extends AbstractController
      * @Route("/detailproduit/{id}/supprimer", name="supprimerproduit")
      */
 
-    public function supprimerproduit(int $id, EntityManagerInterface $entityManager)
+    public function supprimerproduit(int $id, EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Produit::class);
         $produit = $repository->find($id);
