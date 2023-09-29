@@ -53,6 +53,13 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // Vérification du prix
+            $prix = $produit->getPrix();
+            if ($prix <= 0) {
+                $this->addFlash('danger', 'Le prix du produit doit être supérieur à zéro.');
+                return $this->redirectToRoute('ajoutproduit');
+            }
+
             $imagesFiles = $request->files->get('produit')['images_files'];
             if (!empty($imagesFiles)) {
                 foreach ($imagesFiles as $imageFile) {
