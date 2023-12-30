@@ -16,10 +16,26 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom de la catégorie : '
+                'label' => 'Nom de la catégorie : ',
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\Length([
+                        'min' => 3,
+                        'max' => 50,
+                        'minMessage' => 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'Le nom de la catégorie doit contenir au maximum {{ limit }} caractères.',
+                    ]),
+                ],
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description de la catégorie : '
+                'label' => 'Description de la catégorie : ',
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\Length([
+                        'min' => 10,
+                        'max' => 255,
+                        'minMessage' => 'La description de la catégorie doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La description de la catégorie doit contenir au maximum {{ limit }} caractères.',
+                    ]),
+                ],
             ])
             //->add('promotions')
             ->add('Enregistrer', SubmitType::class);
