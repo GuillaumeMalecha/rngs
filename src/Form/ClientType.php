@@ -23,6 +23,14 @@ class ClientType extends AbstractType
             ])
             ->add('telephone', TextType::class, [
                 'label' => "Téléphone",
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\Length([
+                        'min' => 10,
+                        'max' => 10,
+                        'minMessage' => 'Le numéro de téléphone doit contenir {{ limit }} caractères.',
+                        'maxMessage' => 'Le numéro de téléphone doit contenir {{ limit }} caractères.',
+                    ]),
+                ],
                 'required' => false,
             ])
             ->add('Enregistrer', SubmitType::class, [

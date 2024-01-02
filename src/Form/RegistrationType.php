@@ -43,21 +43,45 @@ class RegistrationType extends AbstractType
                 'label' => ' ',
                 'attr' => [
                     'autocomplete' => 'off',
-                    'placeholder' => 'Nom'
+                    'placeholder' => 'Nom',
+                    'contraints' => [
+                        new Length([
+                            'min' => 3,
+                            'max' => 50,
+                            'minMessage' => 'Le nom doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le nom doit contenir au maximum {{ limit }} caractères.',
+                        ]),
+                    ],
                 ]
             ])
             ->add('prenom', null, [
                 'label' => ' ',
                 'attr' => [
                     'autocomplete' => 'off',
-                    'placeholder' => 'Prénom'
+                    'placeholder' => 'Prénom',
+                    'contraints' => [
+                        new Length([
+                            'min' => 3,
+                            'max' => 50,
+                            'minMessage' => 'Le prénom doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le prénom doit contenir au maximum {{ limit }} caractères.',
+                        ]),
+                    ],
                 ]
             ])
             ->add('nomutilisateur', null, [
                 'label' => ' ',
                 'attr' => [
                     'autocomplete' => 'off',
-                    'placeholder' => 'Nom d\'utilisateur'
+                    'placeholder' => 'Nom d\'utilisateur',
+                    'contraints' => [
+                        new Length([
+                            'min' => 3,
+                            'max' => 50,
+                            'minMessage' => 'Le nom d\'utilisateur doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le nom d\'utilisateur doit contenir au maximum {{ limit }} caractères.',
+                        ]),
+                    ],
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -69,7 +93,7 @@ class RegistrationType extends AbstractType
                 'attr' => [
                     'class' => 'checkbox-custom'
                 ],
-                'constraints' => [
+                'contraints' => [
                     new IsTrue([
                         'message' => 'Merci d\'accepter les conditions d\'utilisation.',
                     ]),
@@ -84,7 +108,7 @@ class RegistrationType extends AbstractType
                     'autocomplete' => 'new-password',
                     'placeholder' => 'Mot de passe'
                 ],
-                'constraints' => [
+                'contraints' => [
                     new NotBlank([
                         'message' => 'Merci de noter un mot de passe.',
                     ]),
