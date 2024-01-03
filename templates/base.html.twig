@@ -36,7 +36,7 @@
                         <button class="toggle-bar"><span class="ti-align-justify"></span></button>
                     </div>
                     <ul class="menu">
-                        {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('ROLE_CLIENT') %}
 
                         <li class="dropdown">
                             <a href="JavaScript:Void(0);" class="active">Profil</a>
@@ -46,6 +46,17 @@
                                         <a href="{{ path('app_profil') }}" class="active">Consulter mon profil</a>
                                     </div>
                                 </li>
+
+                                {% elseif is_granted('ROLE_VENDEUR') %}
+
+                                <li class="dropdown">
+                                    <a href="JavaScript:Void(0);" class="active">Profil</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mg-menu-items">
+                                                <a href="{{ path('app_profil') }}" class="active">Consulter mon profil vendeur</a>
+                                            </div>
+                                        </li>
 
                                 {% else %}
                                 <li class="dropdown">
@@ -201,7 +212,7 @@
                                 </li>
                             </ul>
 
-                            {% if is_granted('ROLE_CLIENT') %}
+                            {% if is_granted('ROLE_CLIENT') or is_granted('ROLE_VENDEUR') %}
                                 <ul class="attributes attributes-desk ad-two">
                                     <li class="log-icon lg-ic">
                                         {% if cartService.total == 0 %}
