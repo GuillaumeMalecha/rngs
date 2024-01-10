@@ -52,6 +52,15 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nomProduit = $form->get('nom')->getData();
+
+            // Vérification que le produit n'existe pas déjà
+            $existingProduit = $entityManager->getRepository(Produit::class)->findOneBy(['nom' => $nomProduit]);
+
+            if ($existingProduit) {
+                $this->addFlash('danger', 'Le produit ' . $nomProduit . ' existe déjà.');
+                return $this->redirectToRoute('ajoutproduit');
+            }
 
             // Vérification du prix
             $prix = $produit->getPrix();
@@ -60,6 +69,7 @@ class ProduitController extends AbstractController
                 return $this->redirectToRoute('ajoutproduit');
             }
 
+            // Traitement des images
             $imagesFiles = $request->files->get('produit')['images_files'];
             if (!empty($imagesFiles)) {
                 foreach ($imagesFiles as $imageFile) {
