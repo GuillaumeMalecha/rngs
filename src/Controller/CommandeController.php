@@ -62,7 +62,7 @@ class CommandeController extends AbstractController
             $commande->addProduitsCommande($produitCommande);
 
             // Supprimez le produit du panier après l'ajout à la commande (facultatif)
-            $cartService->delete($cartItem->getProduit()->getId());
+            // $cartService->delete($cartItem->getProduit()->getId());
 
         }
 
@@ -70,11 +70,9 @@ class CommandeController extends AbstractController
         $entityManager->persist($commande);
         $entityManager->flush();
 
-        // Ajoutez un message de succès
-        $this->addFlash('success', 'Votre commande a été passée avec succès.');
 
-        // Redirigez l'utilisateur vers une page de confirmation de commande ou ailleurs
-        return $this->redirectToRoute('detailcommande', ['id' => $commande->getId()]);
+        // Redirigez l'utilisateur vers la page de payement de la commande
+        return $this->redirectToRoute('panier_payement', ['id' => $commande->getId()]);
     }
 
     /**
