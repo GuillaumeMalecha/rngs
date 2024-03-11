@@ -73,4 +73,13 @@ class HomeController extends AbstractController
             'pagination' => $pagination,
         ]);
     }
+
+    /**
+     * @Route("/map", name="map")
+     */
+
+    public function map(): Response
+    {
+        return $this->render('home/map.html.twig');
+    }
 }
