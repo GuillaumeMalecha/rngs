@@ -54,8 +54,11 @@
         // Ajout d'un marqueur personnalisé
         var myIcon = L.icon({
             iconUrl: "{{ asset('assets/img/rngslogo.png') }}",
+            shadowUrl: "{{ asset('assets/img/rngslogoshadow.png') }}",
             iconSize: [150],
+            shadowSize: [180],
             iconAnchor: [75, 100],
+            shadowAnchor: [70, 115],
             popupAnchor: [-30, -76],
         });
 
