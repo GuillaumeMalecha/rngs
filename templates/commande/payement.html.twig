@@ -4,4 +4,14 @@
 
 {% block body %}
     <h1>Payez votre commande avec Stripe</h1>
+
+    <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+    </script>
+
+    <stripe-buy-button
+            buy-button-id="buy_btn_1OuIdjEf0soCt9LMa8PVwNZw"
+            publishable-key="pk_live_51OlBvSEf0soCt9LMEZgJmirGF6NApdsdQuRRdWWXkJzg55604RqQW5JvlU7NT9IRdbalgzGa5FC3fUJxhcUgjnbT00vgi09ZND"
+    >
+    </stripe-buy-button>
 {% endblock %}

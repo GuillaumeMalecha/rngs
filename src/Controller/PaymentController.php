@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Security;
 class PaymentController extends AbstractController
 {
     /**
-     * @Route("/panier/payement/{id}", name="panier_payement", methods={"POST"})
+     * @Route("/panier/payement", name="panier_payement", methods={"POST"})
      */
     public function showCardForm()
     {
