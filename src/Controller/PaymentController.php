@@ -9,17 +9,22 @@ use App\Entity\ProduitCommande;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 class PaymentController extends AbstractController
 {
     /**
-     * @Route("/panier/payement", name="panier_payement", methods={"POST"})
+     * @Route("/panier/payement", name="payement_form")
      */
-    public function showCardForm()
+    public function showPaymentForm(CartService $cartService)
     {
-        return $this->render('commande/payement.html.twig');
+        $detailPanier = $cartService->getDetailPanier();
+        $total = $cartService->getTotal();
+        return $this->render('commande/payement.html.twig', [
+            'items' => $detailPanier,
+            'total' => $total
+        ]);
     }
-
 }

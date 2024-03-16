@@ -54,12 +54,8 @@
                             </tfoot>
                         </table>
                         <br>
-                        <form action="{{ path('panier_payement') }}" method="post">
-                            <label for="donneepaiement">Entrez votre compte bancaire$$</label>
-                            <input type="text" class="form-control" name="donneepaiement" placeholder="BE00 0000 0000 0000">
-                            <br>
-                            <button type="submit" class="btn btn-primary">Passer la commande</button>
-                        </form>
+                        <a href="{{ path('payement_form') }}" class="btn btn-primary">Passer la commande</a>
+
 
                     {% endif %}
 
