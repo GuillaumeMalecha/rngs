@@ -38,11 +38,18 @@
     <div id="map" style="height: 800px;"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+
 
     <script>
         // Initialisation de la carte avec Leaflet
-        var mymap = L.map('map').setView([50.64281, 5.57332], 17);
+        var mymap = L.map('map').setView([50.64266,5.57390], 17);
 
         // Ajout de la couche de tuiles OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,6 +57,14 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
 
+        // Fonction pour récupérer la position de l'utilisateur
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                console.log("La géolocalisation n'est pas prise en charge par ce navigateur.");
+            }
+        }
 
         // Ajout d'un marqueur personnalisé
         var myIcon = L.icon({
@@ -63,17 +78,44 @@
         });
 
         // Ajout d'un marqueur à un emplacement spécifique
-        var markerlogo = L.marker([50.64281, 5.57332], {icon: myIcon}).addTo(mymap);
-        var marker = L.marker([50.64281, 5.57332]).addTo(mymap);
+        var markerlogo = L.marker([50.64266,5.57390], {icon: myIcon}).addTo(mymap);
+        var marker = L.marker([50.64266,5.57390]).addTo(mymap);
 
+        // Fonction pour afficher la position de l'utilisateur et mettre à jour l'itinéraire
+        function showPosition(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
 
-        // Ajout d'une popup au marqueur
-        //marker.bindPopup("<b>Retro Neo Game Shop</b>").openPopup();
+            // Ajoutez un marqueur pour la position de l'utilisateur
+            var userMarker = L.marker([lat, lng]).addTo(mymap);
 
+            // Ajout de la gestion d'itinéraires
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(lat, lng), // Position de l'utilisateur
+                    L.latLng(50.64266,5.57390) // Emplacement de l'entreprise RNGS
+                ],
+                routeWhileDragging: true,
+                geocoder: L.Control.Geocoder.nominatim(),
+                lineOptions: {
+                    styles: [{
+                        color: '#0176ff',
+                        opacity: 1,
+                        weight: 5
+                    }]
+                },
+                router: new L.Routing.osrmv1({
+                    language: 'fr',
+                    //profile: 'foot',
+                }),
+            }).addTo(mymap);
+        }
 
-
-
+        // Appelez la fonction pour récupérer la position de l'utilisateur
+        getLocation();
     </script>
+
+
     <!-- ============================ Fin de la carte ======================================== -->
 
 {% endblock %}
