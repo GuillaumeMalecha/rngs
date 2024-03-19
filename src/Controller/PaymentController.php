@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Security;
 class PaymentController extends AbstractController
 {
     /**
-     * @Route("/panier/payement", name="payement_form")
+     * @Route("/panier/payement/{total}", name="payement_form")
      */
     public function showPaymentForm(CartService $cartService)
     {

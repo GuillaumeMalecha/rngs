@@ -39,7 +39,7 @@
                                         <a href="{{ path('panier_decrement', {'id': item.produit.id}) }}"><i
                                                     class="fas fa-minus-circle"></i></a>
                                     </td>
-                                    <td>{{ item.total /100}} €</td>
+                                    <td>{{ item.total /100 }} €</td>
                                     <td>
                                         <a href="{{ path('panier_delete', {'id': item.produit.id}) }}"><i
                                                     class="fas fa-trash"></i></a>
@@ -49,12 +49,16 @@
                             <tfoot>
                             <tr>
                                 <td colspan="3">Total</td>
-                                <td colspan="2">{{ total /100}} €</td>
+                                <td colspan="2">{{ total /100 }} €</td>
                             </tr>
                             </tfoot>
                         </table>
                         <br>
-                        <a href="{{ path('payement_form') }}" class="btn btn-primary">Passer la commande</a>
+                        <form method="POST" action="{{ path('payement_form', {total: total}) }}">
+                            <button type="submit" class="btn btn-primary">Effectuer le payement de {{ total /100 }} €
+                            </button>
+                        </form>
+{#                        <a href="{{ path('payement_form') }}" class="btn btn-primary">Passer la commande</a>#}
 
 
                     {% endif %}
