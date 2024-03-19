@@ -73,7 +73,8 @@ class CommandeController extends AbstractController
 
         // Redirigez l'utilisateur vers la page de payement de la commande
         //return $this->redirectToRoute('payement_form', ['id' => $commande->getId()]);
-        return $this->redirectToRoute('payement_form');
+        return $this->redirectToRoute('payement_form', ['total' => $cartService->getTotal()]);
+        //return $this->redirectToRoute('payement_form');
     }
 
     /**
