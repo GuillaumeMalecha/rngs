@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Security;
 class CommandeController extends AbstractController
 {
     /**
-     * @Route("/panier/checkout", name="panier_checkout", methods={"POST"})
+     * @Route("/panier/checkout", name="panier_checkout", methods={"GET"})
      */
 
     public function checkout(CartService $cartService, EntityManagerInterface $entityManager, Security $security, Request $request)
@@ -36,16 +36,10 @@ class CommandeController extends AbstractController
         $commande->setDateCommande(new \DateTime('now'));
         $commande->setStatuspaiement('en attente');
         $commande->setStatuscommande('en cours');
+        $commande->setDonneepaiement('Stripe');
 
         // Récupérez les produits actuels dans le panier de l'utilisateur
         $panier = $cartService->getDetailPanier();
-
-        // Récupérez les données de paiement à partir de la requête
-        $donneePaiement = $request->request->get('donneepaiement');
-
-        // Configurez la commande avec les données de paiement
-        $commande->setDonneepaiement($donneePaiement);
-
 
         // Ajoutez chaque produit du panier à la commande
         foreach ($panier as $cartItem) {
@@ -98,6 +92,15 @@ class CommandeController extends AbstractController
             'commande' => $commande,
             'totalCommande' => $totalCommande,
         ]);
+    }
+
+    /**
+     * @Route("/commandesuccess", name="commande_success")
+     */
+    public function commandeSuccess(): Response
+    {
+
+        return $this->render('commande/success.html.twig');
     }
 
 

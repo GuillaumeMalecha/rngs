@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande réussie{% endblock %}
+
+{% block body %}
+<section class="image-cover hero-banner" style="background:url(/assets/img/bgangelisland.png) no-repeat;"
+         data-overlay="6">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="loving-modern-login">
+                    <h3>Commande passée avec succès <i class="fas fa-trophy"></i></h3>
+                    <div class="row main_login_form">
+                        <div class="login_form_dm">
+                            <p>Votre commande est validée. Vous pouvez suivre l'état de votre commande sur votre profil.</p>
+                                <button class="btn btn-primary">
+                                    <a href="{{ path('app_profil') }}">Mon profil</a>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
