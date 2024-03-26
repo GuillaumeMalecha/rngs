@@ -29,7 +29,6 @@ class CommandeController extends AbstractController
         $client = $user->getClients();
 
 
-
         // Créez une nouvelle instance de la commande
         $commande = new Commande();
         $commande->setClient($client);
@@ -66,9 +65,7 @@ class CommandeController extends AbstractController
 
 
         // Redirigez l'utilisateur vers la page de payement de la commande
-        //return $this->redirectToRoute('payement_form', ['id' => $commande->getId()]);
         return $this->redirectToRoute('payement_form', ['total' => $cartService->getTotal()]);
-        //return $this->redirectToRoute('payement_form');
     }
 
     /**
@@ -97,8 +94,18 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commandesuccess", name="commande_success")
      */
-    public function commandeSuccess(): Response
+    public function commandeSuccess(CartService $cartService): Response
     {
+        // Récupérez les produits actuels dans le panier de l'utilisateur
+        $panier = $cartService->getDetailPanier();
+
+        // Ajoutez chaque produit du panier à la commande
+        foreach ($panier as $cartItem) {
+
+            // Supprimez le produit du panier après l'ajout à la commande (facultatif)
+            $cartService->delete($cartItem->getProduit()->getId());
+
+        }
 
         return $this->render('commande/success.html.twig');
     }
